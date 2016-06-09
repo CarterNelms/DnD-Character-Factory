@@ -12,14 +12,14 @@ var initMongo               = traceur.require(__dirname + '/lib/init-mongo.js');
 var initRoutes              = traceur.require(__dirname + '/lib/init-routes');
 
 // instruct express to server up static assets
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use('/js/vendor/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
-app.use('/js/vendor/jquery', express.static(__dirname + '/bower_components/jquery/dist'));
+app.use('/js/vendor/bootstrap', express.static(__dirname + '/../node_modules/bootstrap/dist/js'));
+app.use('/js/vendor/jquery', express.static(__dirname + '/../bower_components/jquery/dist'));
 app.use(initMongo.connect);
 app.use(initRoutes);
 

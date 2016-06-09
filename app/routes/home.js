@@ -1,5 +1,5 @@
 'use strict';
 
-exports.index = (req, res)=>{
+exports.index = (req, res) => {
   res.render('index', {title: 'Home'});
 };

@@ -17,8 +17,8 @@ exports.connect = (req, res, next) => {
 exports.db = fn => {
   MongoClient.connect(mongoUrl, (err, db) => {
     if (err) { throw err; }
-    global.nss = {};
-    global.nss.db = db;
+    global.carter = {};
+    global.carter.db = db;
 
     console.log('Connected to MongoDB');
     fn();

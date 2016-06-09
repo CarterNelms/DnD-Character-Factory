@@ -24,7 +24,9 @@
     "glob": "^7.0.3",
     "jade": "^1.11.0",
     "less": "^2.7.1",
-    "mongodb": "^2.1.21"
+    "lodash": "^4.13.1",
+    "mongodb": "^2.1.21",
+    "traceur": "0.0.110"
   },
   "devDependencies": {
     "grunt": "^1.0.1",

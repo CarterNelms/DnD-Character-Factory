@@ -1,3 +1,35 @@
+html,body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+
 body {
-    background-color: @primary-color;
+    // background-image: url('/lib/img/medieval_text_seamless_texture.png'); // Credit: http://jojo-ojoj.deviantart.com/art/Medieval-text-seamless-textures-png-507388917
+}
+
+#wrapper {
+    min-height:100%;
+    position:relative;
+}
+
+#nav {
+    height: @header-height;
+    background-color: @secondary-color;
+    border-bottom: 4px solid @tertiary-color;
+    padding: 10px;
+}
+
+#content {
+    padding:10px;
+    padding-bottom: @footer-height; /* Height of the footer element */
+}
+
+#footer {
+    width:100%;
+    height: @footer-height;
+    position:absolute;
+    bottom:0;
+    left:0;
+    background-color: @tertiary-color;
 }
