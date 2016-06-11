@@ -18,10 +18,8 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use('/js/vendor/bootstrap', express.static(__dirname + '/../bower_components/bootstrap/dist/js'));
-app.use('/js/vendor/icheck/*.js', express.static(__dirname + '/../bower_components/icheck/*.js'));
-app.use('/css/vendor/icheck/**/*.css', express.static(__dirname + '/../bower_components/icheck/skins/**/*.css'));
-app.use('/js/vendor/jquery', express.static(__dirname + '/../bower_components/jquery/dist'));
+app.use('/js/vendor', express.static(__dirname + '/js/vendor'));
+app.use('/css/vendor', express.static(__dirname + '/css/vendor'));
 app.use(initMongo.connect);
 app.use(initRoutes);
 

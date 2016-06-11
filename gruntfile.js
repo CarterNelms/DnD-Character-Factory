@@ -27,9 +27,9 @@ module.exports = function(grunt) {
     traceur: {
       build: {
         files: [{
-          cwd: 'app/es6',
+          cwd: 'app/js/es6',
           src: '**/*.es6.js',
-          dest: 'app/public/js/compiled',
+          dest: 'app/public/js',
           ext: '.js',
           expand: true
         }]
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
     },
     watch: {
       js: {
-        files: ['<%= jshint.files %>', 'app/es6/**/*.es6.js'],
+        files: ['<%= jshint.files %>', 'app/js/es6/**/*.es6.js'],
         tasks: ['jshint', 'traceur']
       },
       less: {
