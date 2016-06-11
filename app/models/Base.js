@@ -8,12 +8,18 @@ class Base {
     collection.remove({_id: id}, fn);
   }
 
-  static findAll (Model, collection, fn) {
-    Base.findByProperties(Model, collection, {}, fn);
+  static findAll (Model, collection, fn, params) {
+    Base.findByProperties(Model, collection, {}, fn, params);
   }
 
-  static findByProperties(Model, collection, properties, fn) {
-    collection.find(properties).toArray((e, instances) => {
+  static findByProperties(Model, collection, properties, fn, params) {
+    var results = collection.find(properties);
+    if (params) {
+      if(params.sort) {
+        results.sort(params.sort);
+      }
+    }
+    results.toArray((e, instances) => {
       instances = instances.map(instance => _.create(Model.prototype, instance));
       fn(instances);
     });

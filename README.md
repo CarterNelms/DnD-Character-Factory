@@ -6,4 +6,4 @@ Clone traceur-compiler to tools
 npm install
 make`
 
-mongoimport --db carter --collection races --type json --file db/races.json --jsonArray --drop
+`npm run initdb`

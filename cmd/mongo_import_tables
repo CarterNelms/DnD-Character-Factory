@@ -1,0 +1,12 @@
+#!/bin/bash
+
+TABLES=( races classes )
+
+TABLE_COUNT=${#TABLES[@]}
+
+DB=$1
+
+for (( i=0;i<$TABLE_COUNT;i++)); do
+  TABLE=${TABLES[${i}]}
+  echo `cmd/mongo_import_table ${TABLE} ${DB}`
+done 

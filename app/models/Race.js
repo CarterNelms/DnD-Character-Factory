@@ -9,7 +9,8 @@ var Mongo = require('mongodb');
 
 class Race {
     static findAll (fn) {
-        Base.findAll(Base, collection, fn);
+        var params = { sort: { name: 1 } };
+        Base.findAll(Race, collection, fn, params);
     }
 }
 

@@ -1,35 +1,99 @@
 html,body {
-    margin:0;
-    padding:0;
-    height:100%;
+  margin:0;
+  padding:0;
+  height:100%;
 }
 
 body {
-    // background-image: url('/lib/img/medieval_text_seamless_texture.png'); // Credit: http://jojo-ojoj.deviantart.com/art/Medieval-text-seamless-textures-png-507388917
+  // background-image: url('/lib/img/medieval_text_seamless_texture.png'); // Credit: http://jojo-ojoj.deviantart.com/art/Medieval-text-seamless-textures-png-507388917
 }
 
 #wrapper {
-    min-height:100%;
-    position:relative;
+  min-height:100%;
+  position:relative;
 }
 
 #nav {
-    height: @header-height;
-    background-color: @secondary-color;
-    border-bottom: 4px solid @tertiary-color;
-    padding: 10px;
+  height: @header-height;
+  background-color: @brand-primary;
+  border-bottom: 4px solid @gray-darker;
+  padding: 10px;
 }
 
 #content {
-    padding:10px;
-    padding-bottom: @footer-height; /* Height of the footer element */
+  padding:10px;
+  padding-bottom: @footer-height; /* Height of the footer element */
 }
 
 #footer {
-    width:100%;
-    height: @footer-height;
-    position:absolute;
-    bottom:0;
-    left:0;
-    background-color: @tertiary-color;
+  width:100%;
+  height: @footer-height;
+  position:absolute;
+  bottom:0;
+  left:0;
+  background-color: @gray-darker;
 }
+
+.select2-container {
+  width: 100% !important;
+
+  &.select2-container--disabled .select2-selection {
+    background-color: @input-bg-disabled;
+  }
+
+  .select2-selection__rendered {
+    color: @input-color !important;
+  }
+}
+
+.select2-container .select2-selection {
+  height: @input-height-base;
+  padding-top: 3px;
+
+  .select2-selection__arrow {
+    top: 4px;
+  }
+}
+
+.select2-container .select2-selection, .select2-dropdown {
+  border-color: @input-border;
+}
+
+.select2-container--default .select2-results__option[aria-selected] {
+  &[aria-selected='true'] {
+    background-color: @gray-lighter;
+    color: @gray-dark;
+  }
+
+  &.select2-results__option--highlighted {
+    background-color: @gray-dark;
+    color: @gray-lightest;
+  }
+}
+
+
+// @properties:    'p' 'padding','m' 'margin';
+// @directions:    't' 'top','b' 'bottom','l' 'left','r' 'right';
+
+// .generate-utility-classes(@n, @i: 5) when (@i =< @n) {
+
+//   .for(@properties); .-each(@property) {
+//     @p:         extract(@property, 1);
+//     @pname:     extract(@property, 2);
+
+//     .@{p}-@{i} {
+//       // @{pname}: @{i}px;
+//     }
+
+//     // .for(@directions); .-each(@direction) {
+
+//     // }
+//   }
+
+//   // .column-@{i} {
+//   //   width: (@i * 100% / @n);
+//   // }
+//   .generate-utility-classes(@n, (@i + 5));
+// }
+
+// .generate-utility-classes(30);

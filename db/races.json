@@ -1,11 +1,38 @@
 [
-    {"name":"Dwarf"},
-    {"name":"Elf"},
-    {"name":"Halfling"},
-    {"name":"Human"},
-    {"name":"Dragonborn"},
-    {"name":"Gnome"},
-    {"name":"Half-Elf"},
-    {"name":"Half-Orc"},
-    {"name":"Tiefling"}
+    {
+        "_id": "dwarf",
+        "name":"Dwarf"
+    },
+    {
+        "_id": "elf",
+        "name":"Elf"
+    },
+    {
+        "_id": "halfling",
+        "name":"Halfling"
+    },
+    {
+        "_id": "human",
+        "name":"Human"
+    },
+    {
+        "_id": "dragonborn",
+        "name":"Dragonborn"
+    },
+    {
+        "_id": "gnome",
+        "name":"Gnome"
+    },
+    {
+        "_id": "half-elf",
+        "name":"Half-Elf"
+    },
+    {
+        "_id": "half-orc",
+        "name":"Half-Orc"
+    },
+    {
+        "_id": "tiefling",
+        "name":"Tiefling"
+    }
 ]

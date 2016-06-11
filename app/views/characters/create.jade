@@ -2,10 +2,36 @@ extends ../shared/template.jade
 
 block content
   .row
-    .col-xs-12
+    .col-xs-3
       h3 Race
-      select
-        each r in races
-          option= r._id
+      select#race(name='race')
+        each race in races
+          option(value=race._id)= race.name
+    .col-xs-3
+      h3 Class
+      select#class(name='class')
+        each clss in classes
+          option(value=clss._id)= clss.name
+  .row
+    .col-md-12
+      h3.pull-left Ability Scores
+  .row
+    .col-md-4
+      select#ability-scores-method(name='ability-score-method')
+        option Custom Entry
+        option 3d6
+        option 4d6
+        option 5d6
+    .col-md-4
+      input#ability-scores-orderable(type='checkbox' name='ability-scores-orderable')
+  .row
+    .col-md-12
+      - var abilities = ['Strength','Dexterity','Constitution','Intelligence','Wisdom','Charisma'];
+      each ability in abilities
+        - var ability_lc = ability.toLowerCase();
+        .row.p-b-sm(id=ability_lc)
+          .col-xs-3
+            .ability-score
 
 block scripts
+  script(src="/js/compiled/characters/create.js")

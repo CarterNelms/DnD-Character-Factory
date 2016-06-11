@@ -1,13 +1,17 @@
 doctype html
 html
   head
-  title DnD Character Factory |
-    if title
-      |  #{title}
-    else
-    
-  //- Style
-  link(rel='stylesheet', href='/css/style.css')
+    title DnD Character Factory |
+      if title
+        |  #{title}
+      else
+      
+    //- Select2
+    link(rel='stylesheet', href='/css/vendor/select2/select2.min.css')
+
+    //- Style
+    link(rel='stylesheet', href='/css/style.css')
+
   body
     #wrapper
       nav#nav
@@ -21,4 +25,9 @@ html
     script(src="/js/vendor/jquery/jquery.min.js")
     //- Bootstrap
     script(src="/js/vendor/bootstrap/bootstrap.min.js")
+    //- iCheck
+    script(src="/js/vendor/icheck/icheck.min.js")
+    //- Select2
+    script(src="/js/vendor/select2/select2.full.min.js")
+
     block scripts

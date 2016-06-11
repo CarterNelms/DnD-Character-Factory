@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TABLE=$1
+if [ $# -eq 0 ]
+  then
+    DB="test"
+  else
+    DB=$2
+fi
+
+echo `mongoimport --db ${DB} --collection ${TABLE} --type json --file db/${TABLE}.json --jsonArray --drop`
