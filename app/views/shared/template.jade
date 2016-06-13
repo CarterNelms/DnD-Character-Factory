@@ -6,10 +6,13 @@ html
         |  #{title}
       else
       
+    //- DataTables
+    link(rel='stylesheet', href='/css/vendor/dataTables/dataTables.bootstrap.min.css')
+    //- iCheck
+    link(rel='stylesheet', href='/css/vendor/iCheck/minimal/orange.css')
     //- Select2
     link(rel='stylesheet', href='/css/vendor/select2/select2.min.css')
-
-    //- Style
+    //- Style (Includes Bootstrap)
     link(rel='stylesheet', href='/css/style.css')
 
   body
@@ -23,10 +26,14 @@ html
 
     //- jQuery
     script(src="/js/vendor/jquery/jquery.min.js")
+
+    //- DataTables
+    script(src="/js/vendor/dataTables/jquery.dataTables.min.js")
+    script(src="/js/vendor/dataTables/dataTables.bootstrap.min.js")
     //- Bootstrap
     script(src="/js/vendor/bootstrap/bootstrap.min.js")
     //- iCheck
-    //- script(src="/js/vendor/icheck/icheck.min.js")
+    script(src="/js/vendor/icheck/icheck.min.js")
     //- Select2
     script(src="/js/vendor/select2/select2.full.min.js")
 

@@ -1,0 +1,32 @@
+[
+    {
+        "name":"Strength",
+        "abbreviation":"Str",
+        "order":"1"
+    },
+    {
+        "name":"Dexterity",
+        "abbreviation":"Dex",
+        "order":"2"
+    },
+    {
+        "name":"Consitution",
+        "abbreviation":"Con",
+        "order":"3"
+    },
+    {
+        "name":"Intelligence",
+        "abbreviation":"Int",
+        "order":"4"
+    },
+    {
+        "name":"Wisdom",
+        "abbreviation":"Wis",
+        "order":"5"
+    },
+    {
+        "name":"Charisma",
+        "abbreviation":"Cha",
+        "order":"6"
+    }
+]

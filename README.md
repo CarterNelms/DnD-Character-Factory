@@ -6,4 +6,4 @@ Clone traceur-compiler to tools
 npm install
 make`
 
-`npm run initdb`
+`npm run init_db`

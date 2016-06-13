@@ -2,16 +2,14 @@
 
 'use strict';
 
-var collection = global.carter.db.collection('classes');
-var traceur = require('traceur');
-var Base = traceur.require(__dirname + '/base.js');
-var Mongo = require('mongodb');
+var collectionName = 'class';
 
-class Class {
-    static findAll (fn) {
-        var params = { sort: { name: 1 } };
-        Base.findAll(Class, collection, fn, params);
-    }
-}
+var mongoose = require('mongoose');
 
-module.exports = Class;
+var schema = new mongoose.Schema({
+    name: { type: String, required: true }
+});
+
+var Model = mongoose.model(collectionName, schema);
+
+module.exports = Model;

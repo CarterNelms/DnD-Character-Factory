@@ -71,29 +71,33 @@ body {
   }
 }
 
+.select2-container .select2-selection .select2-selection__arrow b {
+  border-color: @input-color transparent transparent transparent;
+}
 
-// @properties:    'p' 'padding','m' 'margin';
-// @directions:    't' 'top','b' 'bottom','l' 'left','r' 'right';
+.select2-container.select2-container--open .select2-selection .select2-selection__arrow b {
+  border-color: transparent transparent @input-color transparent;
+}
 
-// .generate-utility-classes(@n, @i: 5) when (@i =< @n) {
+// Utility Classes
+@directions:    t top , b bottom, l left, r right;
 
-//   .for(@properties); .-each(@property) {
-//     @p:         extract(@property, 1);
-//     @pname:     extract(@property, 2);
+.generate-utility-classes(@n, @i: 0) when (@i =< @n) {
 
-//     .@{p}-@{i} {
-//       // @{pname}: @{i}px;
-//     }
+  .for(@directions); .-each(@direction) {
+    @d: extract(@direction, 1);
+    @dir: extract(@direction, 2);
 
-//     // .for(@directions); .-each(@direction) {
+    .p-@{d}-@{i} {
+      padding-@{dir}: @i*1px !important;
+    }
 
-//     // }
-//   }
+    .m-@{d}-@{i} {
+      margin-@{dir}: @i*1px !important;
+    }
+  }
 
-//   // .column-@{i} {
-//   //   width: (@i * 100% / @n);
-//   // }
-//   .generate-utility-classes(@n, (@i + 5));
-// }
+  .generate-utility-classes(@n, (@i + 5));
+}
 
-// .generate-utility-classes(30);
+.generate-utility-classes(30);
