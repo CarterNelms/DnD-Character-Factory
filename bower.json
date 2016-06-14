@@ -1,0 +1,28 @@
+{
+  "name": "DnD-Character-Factory",
+  "description": "Generate and track Dungeons and Dragons characters",
+  "main": "app/app.js",
+  "authors": [
+    "Carter Nelms"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/CarterNelms/DnD-Character-Factory",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "datatables.net-bs": "^1.10.12",
+    "font-awesome": "fontawesome#^4.6.3",
+    "iCheck": "icheck#^1.0.2",
+    "datatables.net": "^1.10.12",
+    "jquery": "^3.0.0"
+  },
+  "resolutions": {
+    "jquery": "^3.0.0"
+  }
+}

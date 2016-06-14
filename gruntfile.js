@@ -35,6 +35,12 @@ module.exports = function(grunt) {
         }]
       }
     },
+    ts: {
+      default : {
+        // src: ["app/app.ts"],
+        tsconfig: true
+      }
+    },
     watch: {
       js: {
         files: ['<%= jshint.files %>', 'app/js/es6/**/*.es6.js'],
@@ -55,6 +61,10 @@ module.exports = function(grunt) {
             timestamp: "<%= grunt.template.today() %>"
           }
         }
+      },
+      ts: {
+        files: ['app/app.ts','tsconfig.json'],
+        tasks: ['ts']
       }
     }
   });
@@ -63,8 +73,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks("grunt-ts");
 
-  grunt.registerTask('default', ['less','jshint','traceur','watch']);
+  grunt.registerTask('default', ['ts','less','jshint','traceur','watch']);
 
   grunt.registerMultiTask('traceur', 'ES6 to ES5', function(){
     var exec  = require('child_process').exec;

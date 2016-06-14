@@ -7,3 +7,7 @@ npm install
 make`
 
 `npm run init_db`
+
+Set up Mongo
+
+Install TypeScript and Typings globally
