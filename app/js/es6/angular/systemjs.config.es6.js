@@ -2,10 +2,10 @@
  * System configuration for Angular 2 samples
  * Adjust as necessary for your application needs.
  */
-(function(global) {
+((global) => {
   // map tells the System loader where to look for things
   var map = {
-    'app':                        'app', // 'dist',
+    'app':                        'js/angular', // 'dist',
     '@angular':                   'node_modules/@angular',
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs'
@@ -29,11 +29,11 @@
   ];
   // Individual files (~300 requests):
   function packIndex(pkgName) {
-    packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
+    packages[`@angular/${pkgName}`] = { main: 'index.js', defaultExtension: 'js' };
   }
   // Bundled (~40 requests):
   function packUmd(pkgName) {
-    packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+    packages[`@angular/${pkgName}`] = { main: `/bundles/${pkgName}.umd.js`, defaultExtension: 'js' };
   }
   // Most environments should use UMD; some (Karma) need the individual index files
   var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
