@@ -21,7 +21,7 @@ function load (app, fn){
   app.get('/', dbg, home.index);
   app.get('/characters/create', dbg, characters.create);
 
-  app.get('*', dbg, error['404']);
+  // app.get('*', dbg, error['404']);
 
   console.log('Routes Loaded');
   fn();

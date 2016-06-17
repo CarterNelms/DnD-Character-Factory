@@ -20,9 +20,10 @@
     "font-awesome": "fontawesome#^4.6.3",
     "iCheck": "icheck#^1.0.2",
     "datatables.net": "^1.10.12",
+    "select2": "^4.0.3",
     "jquery": "^3.0.0"
   },
   "resolutions": {
-    "jquery": "^3.0.0"
+    "jquery": "1.9.1 - 2"
   }
 }

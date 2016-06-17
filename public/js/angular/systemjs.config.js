@@ -9,7 +9,7 @@
 
   //map tells the System loader where to look for things
   var  map = {
-    'app':                        'js',
+    'app':                        'js/angular',
 
     '@angular':                   'https://npmcdn.com/@angular', // sufficient if we didn't pin the version
     'angular2-in-memory-web-api': 'https://npmcdn.com/angular2-in-memory-web-api', // get latest
@@ -22,7 +22,7 @@
   var packages = {
     'app':                        { main: 'main.ts',  defaultExtension: 'ts' },
     'rxjs':                       { defaultExtension: 'js' },
-    'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+    // 'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
   };
 
   var ngPackageNames = [
@@ -39,18 +39,12 @@
 
   // Add map entries for each angular package
   // only because we're pinning the version with `ngVer`.
-  ngPackageNames.forEach(function(pkgName) {
-    map['@angular/'+pkgName] = 'https://npmcdn.com/@angular/' + pkgName + ngVer;
-  });
-
   // Add package entries for angular packages
   ngPackageNames.forEach(function(pkgName) {
-
+    map['@angular/'+pkgName] = 'https://npmcdn.com/@angular/' + pkgName + ngVer;
+    
     // Bundled (~40 requests):
     packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
-
-    // Individual files (~300 requests):
-    //packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
   });
 
   var config = {
@@ -67,7 +61,6 @@
     map: map,
     packages: packages
   }
-  console.log(config);
 
   System.config(config);
 

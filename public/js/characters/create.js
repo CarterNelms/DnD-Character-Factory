@@ -24,13 +24,11 @@ $(function() {
     $('#rules-na')[rulesNA ? 'show' : 'hide']();
   }).trigger('change');
   $('#abilities-table').DataTable({
+    "responsive": true,
     "bLengthChange": false,
     "bSort": false,
     "processing": false,
     "serverSide": false,
     "dom": '<"clear">rt'
-  });
-  System.import('app').catch(function(err) {
-    console.error(err);
   });
 });
