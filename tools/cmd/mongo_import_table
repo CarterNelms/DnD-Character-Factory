@@ -9,4 +9,4 @@ if [ $# -eq 0 ]
 fi
 
 # echo `mongorestore --drop -d ${DB} -c ${TABLE} db/${TABLE}.bson`
-echo `mongoimport --db ${DB} --collection ${TABLE} --type json --file db/${TABLE}.json --jsonArray --drop`
+echo `mongoimport --db ${DB} --collection ${TABLE} --type json --file tools/db/${TABLE}.json --jsonArray --drop`

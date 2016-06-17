@@ -1,8 +1,0 @@
-#!/bin/bash
-
-DB=$1
-
-for file in db/*.json; do
-  TABLE=$(echo ${file##*/} | cut -f 1 -d '.')
-  echo `cmd/mongo_import_table ${TABLE} ${DB}`
-done

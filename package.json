@@ -5,9 +5,9 @@
   "description": "Generate and track Dungeons and Dragons characters",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app/app.js",
-    "init_db": "cmd/mongo_import_tables",
-    "init_table": "cmd/mongo_import_table"
+    "dev": "nodemon app.js",
+    "init_db": "tools/cmd/mongo_import_tables",
+    "init_table": "tools/cmd/mongo_import_table"
   },
   "repository": {
     "type": "git",

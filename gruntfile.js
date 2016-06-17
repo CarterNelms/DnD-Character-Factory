@@ -5,9 +5,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,                   // Enable dynamic expansion.
-          cwd: 'app/less',                // Src matches are relative to this path.
+          cwd: 'app/lib/less',                // Src matches are relative to this path.
           src: ['*.less','!_*.less'],     // Actual pattern(s) to match.
-          dest: 'app/public/css',         // Destination path prefix.
+          dest: 'public/css',         // Destination path prefix.
           ext: '.css',                    // Dest filepaths will have this extension.
         }],
         options: {
@@ -27,27 +27,31 @@ module.exports = function(grunt) {
     traceur: {
       build: {
         files: [{
-          cwd: 'app/js/es6',
+          cwd: 'app/lib/js/es6',
           src: '**/*.es6.js',
-          dest: 'app/public/js',
+          dest: 'public/js',
           ext: '.js',
           expand: true
         }]
       }
     },
-    ts: {
-      default : {
-        // src: ["app/app.ts"],
-        tsconfig: true
-      }
-    },
+    // ts: {
+    //   default : {
+    //     tsconfig: true,
+    //     src: ['app/components/**/*.ts'],
+    //     dest: 'app/public/components',
+    //     options: {
+    //       fast: "never"
+    //     }
+    //   }
+    // },
     watch: {
       js: {
-        files: ['<%= jshint.files %>', 'app/js/es6/**/*.es6.js'],
+        files: ['<%= jshint.files %>', 'app/lib/js/es6/**/*.es6.js'],
         tasks: ['jshint', 'traceur']
       },
       less: {
-        files: ['app/less/**/*.less'],
+        files: ['app/lib/less/**/*.less'],
         tasks: ['less'],
         options: {
           spawn: false
@@ -61,10 +65,10 @@ module.exports = function(grunt) {
             timestamp: "<%= grunt.template.today() %>"
           }
         }
-      },
-      ts: {
-        files: ['app/app.ts','tsconfig.json'],
-        tasks: ['ts']
+      // },
+      // ts: {
+      //   files: ['app/app.ts','app/components','tsconfig.json'],
+      //   tasks: ['ts']
       }
     }
   });
@@ -75,7 +79,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks("grunt-ts");
 
-  grunt.registerTask('default', ['ts','less','jshint','traceur','watch']);
+  // grunt.registerTask('default', ['ts','less','jshint','traceur','watch']);
+  grunt.registerTask('default', ['less','jshint','traceur','watch']);
 
   grunt.registerMultiTask('traceur', 'ES6 to ES5', function(){
     var exec  = require('child_process').exec;

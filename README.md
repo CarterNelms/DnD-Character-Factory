@@ -2,7 +2,9 @@
 Generate and track Dungeons and Dragons characters
 
 Clone traceur-compiler to tools
-`cd tools/traceur-compiler
+`cd tools
+git clone https://github.com/google/traceur-compiler.git
+cd traceur-compiler
 npm install
 make`
 

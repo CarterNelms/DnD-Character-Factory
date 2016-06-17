@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DB=$1
+
+for file in tools/db/*.json; do
+  TABLE=$(echo ${file##*/} | cut -f 1 -d '.')
+  echo `npm run init_table ${TABLE} ${DB}`
+done

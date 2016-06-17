@@ -30,4 +30,7 @@ $(function() {
     "serverSide": false,
     "dom": '<"clear">rt'
   });
+  System.import('app').catch(function(err) {
+    console.error(err);
+  });
 });
