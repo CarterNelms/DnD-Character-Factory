@@ -4,4 +4,3 @@
 node_modules/
 bower_components/
 tools/traceur-compiler/
-**/.baseDir.*

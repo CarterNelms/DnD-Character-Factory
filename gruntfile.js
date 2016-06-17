@@ -44,10 +44,8 @@ module.exports = function(grunt) {
     },
     ts: {
       default : {
-        cwd: 'public/js/ts',
-        src: ['**/*.ts'],
-        baseDir: "public/js/compiled",
-        dest: "public/js/compiled",
+        src: ["public/js/ts/angular/**/*.ts"],
+        outDir: "public/js/compiled/angular",
         options: {
           experimentalDecorators: true,
           fast: "never",
