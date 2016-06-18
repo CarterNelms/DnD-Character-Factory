@@ -19,21 +19,6 @@ module.exports = function(grunt) {
         ]
       }
     },
-    less: {
-      dist: {
-        files: [{
-          expand: true,                   // Enable dynamic expansion.
-          cwd: 'public/css/less',                // Src matches are relative to this path.
-          src: ['*.less','!_*.less'],     // Actual pattern(s) to match.
-          dest: 'public/css/compiled',             // Destination path prefix.
-          ext: '.css',                    // Dest filepaths will have this extension.
-        }],
-        options: {
-          sourcemap: 'none',          // No need for these now
-          cacheLocation: 'temp/.less-cache'
-        }
-      }
-    },
     jshint: {
       files: ['gruntfile.js'],
       options: {
@@ -42,59 +27,90 @@ module.exports = function(grunt) {
         }
       }
     },
-    ts: {
-      default : {
-        src: ["public/js/ts/angular/**/*.ts"],
-        outDir: "public/js/compiled/angular",
+    less: {
+      dist: {
+        expand: true,                   // Enable dynamic expansion.
+        cwd: 'public/css/less',                // Src matches are relative to this path.
+        src: ['*.less','!_*.less'],     // Actual pattern(s) to match.
+        dest: 'public/css/compiled',             // Destination path prefix.
+        ext: '.css',                    // Dest filepaths will have this extension.
         options: {
-          experimentalDecorators: true,
-          fast: "never",
-          sourceMap: false
+          sourcemap: 'none',          // No need for these now
+          cacheLocation: 'temp/.less-cache'
         }
       }
     },
+    // systemjs: {
+    //   options: {
+    //     configFile: "tools/systemjs.config.grunt.js",
+    //     sfx: true,
+    //     minify: true,
+    //     // defaultJSExtension: true,
+    //     build: {
+    //       mangle: false
+    //     }
+    //   },
+    //   dist: {
+    //     files: [{
+    //       "src":  "public/js/ts/angular/main.ts",
+    //       "dest": "public/js/compiled/angular/main.js"
+    //     }]
+    //   }
+    // },
+    // ts: {
+    //   default : {
+    //     src: ["public/js/ts/angular/**/*.ts"],
+    //     // outDir: "public/js/compiled/angular",
+    //     out: "public/js/compiled/angular/main.js",
+    //     options: {
+    //       experimentalDecorators: true,
+    //       fast: "never",
+    //       moduleResolution: 'node',
+    //       noResolve: false,
+    //       sourceMap: false
+    //     }
+    //   }
+    // },
     traceur: {
       build: {
-        files: [{
-          cwd: 'public/js/es6',
-          src: '**/*.js',
-          dest: 'public/js/compiled',
-          rename  : function (dest, src) {
-            var folder    = src.substring(0, src.lastIndexOf('/'));
-            var filename  = src.substring(src.lastIndexOf('/'), src.length);
+        cwd: 'public/js/es6',
+        src: '**/*.es6.js',
+        dest: 'public/js/compiled',
+        rename  : function (dest, src) {
+          var folder    = src.substring(0, src.lastIndexOf('/'));
+          var filename  = src.substring(src.lastIndexOf('/'), src.length);
 
-            filename  = filename.split('.es6.js')[0];
+          filename  = filename.split('.es6.js')[0];
 
-            return dest + '/' + folder + filename + '.js';
-          },
-          expand: true
-        }]
+          return dest + '/' + folder + filename + '.js';
+        },
+        expand: true
       }
     },
     watch: {
       js: {
-        files: ['<%= jshint.files %>', 'app/js/es6/**/*.es6.js'],
+        files: ['<%= jshint.files %>', '<%= traceur.build.cwd %>/<%= traceur.build.src %>'],
         tasks: ['jshint', 'traceur']
       },
       less: {
-        files: ['app/less/**/*.less'],
+        files: ['public/css/less/**/*.less'],
         tasks: ['less'],
         options: {
           spawn: false
         }
       },
       jade: {
-        files: ['views/**/*.jade'],
+        files: ['app/views/**/*.jade'],
         options: {
           data: {
             debug: true,
             timestamp: "<%= grunt.template.today() %>"
           }
         }
-      },
-      ts: {
-        files: ['app/js/ts/**/*.ts','tsconfig.json'],
-        tasks: ['ts']
+      // },
+      // ts: {
+      //   files: ['<%= ts.default.src %>','tsconfig.json'],
+      //   tasks: ['ts']
       }
     }
   });
@@ -104,10 +120,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks("grunt-ts");
+  // grunt.loadNpmTasks("grunt-systemjs-builder");
+  // grunt.loadNpmTasks("grunt-ts");
 
-  // grunt.registerTask('default', ['copy','less','jshint','traceur','watch']);
-  grunt.registerTask('setup', ['ts','copy','less','jshint','traceur']);
+  grunt.registerTask('setup', ['copy','less','jshint','traceur']);
+  // grunt.registerTask('setup', ['systemjs','copy','less','jshint','traceur']);
+  // grunt.registerTask('setup', ['ts','copy','less','jshint','traceur']);
   grunt.registerTask('default', ['setup','watch']);
 
   grunt.registerMultiTask('traceur', 'ES6 to ES5', function(){

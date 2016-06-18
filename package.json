@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": "true",
   "description": "Generate and track Dungeons and Dragons characters",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
     "init_db": "tools/cmd/mongo_import_tables",
@@ -49,11 +49,16 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-less": "^1.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-sass": "^1.2.0",
-    "grunt-ts": "^5.5.1",
     "jshint": "^2.9.2",
+    "jspm": "^0.16.39",
     "nodemon": "^1.9.2",
-    "traceur": "0.0.110",
-    "typescript": "^1.8.10"
+    "systemjs-builder": "^0.15.23",
+    "traceur": "0.0.110"
+  },
+  "jspm": {
+    "dependencies": {},
+    "devDependencies": {
+      "typescript": "npm:typescript@^1.6.2"
+    }
   }
 }

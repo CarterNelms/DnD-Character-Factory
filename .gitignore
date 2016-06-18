@@ -1,6 +1,7 @@
 .DS_Store
 .tscache/
 
-node_modules/
 bower_components/
+node_modules/
+jspm_packages/
 tools/traceur-compiler/

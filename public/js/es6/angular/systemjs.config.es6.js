@@ -5,7 +5,7 @@
 ((global) => {
   // map tells the System loader where to look for things
   var map = {
-    'app':                        'js/angular', // 'dist',
+    'app':                        'js/compiled/angular', // 'dist',
     '@angular':                   'node_modules/@angular',
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs'
@@ -33,7 +33,7 @@
   }
   // Bundled (~40 requests):
   function packUmd(pkgName) {
-    packages[`@angular/${pkgName}`] = { main: `/bundles/${pkgName}.umd.js`, defaultExtension: 'js' };
+    packages[`@angular/${pkgName}`] = { main: `${pkgName}.umd.js`, defaultExtension: 'js' };
   }
   // Most environments should use UMD; some (Karma) need the individual index files
   var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;

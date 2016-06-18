@@ -1,6 +1,6 @@
 (function(global) {
   var map = {
-    'app': 'js/angular',
+    'app': 'js/compiled/angular',
     '@angular': 'node_modules/@angular',
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs': 'node_modules/rxjs'
@@ -25,7 +25,7 @@
   }
   function packUmd(pkgName) {
     packages[("@angular/" + pkgName)] = {
-      main: ("/bundles/" + pkgName + ".umd.js"),
+      main: (pkgName + ".umd.js"),
       defaultExtension: 'js'
     };
   }
