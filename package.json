@@ -54,11 +54,5 @@
     "nodemon": "^1.9.2",
     "systemjs-builder": "^0.15.23",
     "traceur": "0.0.110"
-  },
-  "jspm": {
-    "dependencies": {},
-    "devDependencies": {
-      "typescript": "npm:typescript@^1.6.2"
-    }
   }
 }

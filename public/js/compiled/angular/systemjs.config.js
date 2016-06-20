@@ -1,22 +1,13 @@
 (function(global) {
   var map = {
-    'app': 'js/compiled/angular',
-    '@angular': 'node_modules/@angular',
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-    'rxjs': 'node_modules/rxjs'
+    'app': 'js/ts/angular',
+    'typescript': '//cdn.rawgit.com/Microsoft/TypeScript/v1.6.2/lib/typescript.js'
   };
-  var packages = {
-    'app': {
-      main: 'main.js',
-      defaultExtension: 'js'
-    },
-    'rxjs': {defaultExtension: 'js'},
-    'angular2-in-memory-web-api': {
-      main: 'index.js',
-      defaultExtension: 'js'
-    }
-  };
-  var ngPackageNames = ['common', 'compiler', 'core', 'http', 'platform-browser', 'platform-browser-dynamic', 'router', 'router-deprecated', 'upgrade'];
+  var packages = {'app': {
+      main: 'main',
+      defaultExtension: 'ts'
+    }};
+  var ngPackageNames = [];
   function packIndex(pkgName) {
     packages[("@angular/" + pkgName)] = {
       main: 'index.js',
@@ -33,6 +24,7 @@
   ngPackageNames.forEach(setPackageConfig);
   var config = {
     map: map,
+    transpiler: 'typescript',
     packages: packages
   };
   System.config(config);

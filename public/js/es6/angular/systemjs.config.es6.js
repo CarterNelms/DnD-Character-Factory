@@ -5,27 +5,28 @@
 ((global) => {
   // map tells the System loader where to look for things
   var map = {
-    'app':                        'js/compiled/angular', // 'dist',
-    '@angular':                   'node_modules/@angular',
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-    'rxjs':                       'node_modules/rxjs'
+    'app':                        'js/ts/angular', // 'dist',
+    // '@angular':                   'node_modules/@angular',
+    // 'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
+    // 'rxjs':                       'node_modules/rxjs',
+    'typescript': '//cdn.rawgit.com/Microsoft/TypeScript/v1.6.2/lib/typescript.js'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
-    'app':                        { main: 'main.js',  defaultExtension: 'js' },
-    'rxjs':                       { defaultExtension: 'js' },
-    'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+    'app':                        { main: 'main',  defaultExtension: 'ts' },
+    // 'rxjs':                       { defaultExtension: 'js' },
+    // 'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
   };
   var ngPackageNames = [
-    'common',
-    'compiler',
-    'core',
-    'http',
-    'platform-browser',
-    'platform-browser-dynamic',
-    'router',
-    'router-deprecated',
-    'upgrade',
+    // 'common',
+    // 'compiler',
+    // 'core',
+    // 'http',
+    // 'platform-browser',
+    // 'platform-browser-dynamic',
+    // 'router',
+    // 'router-deprecated',
+    // 'upgrade',
   ];
   // Individual files (~300 requests):
   function packIndex(pkgName) {
@@ -39,9 +40,12 @@
   var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
   // Add package entries for angular packages
   ngPackageNames.forEach(setPackageConfig);
+
   var config = {
     map: map,
+    transpiler: 'typescript',
     packages: packages
   };
+
   System.config(config);
 })(this);
