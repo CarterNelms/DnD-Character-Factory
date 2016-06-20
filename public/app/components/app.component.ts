@@ -2,8 +2,6 @@ import { Component } from 'angular2/core';
  
 @Component({
     selector: 'my-app',
-    template: '{{welcome}}'
+    templateUrl: '/partials/deleteme'
 })
-export class AppComponent {
-    welcome: string = 'Hello from Angular2!'
-}
+export class AppComponent { }
