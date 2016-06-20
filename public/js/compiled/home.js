@@ -1,5 +1,5 @@
 $(function() {
-  System.import('app').catch(function(err) {
+  System.import('app/main').catch(function(err) {
     console.error(err);
   });
 });

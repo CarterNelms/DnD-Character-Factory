@@ -3,5 +3,5 @@
 
 bower_components/
 node_modules/
-jspm_packages/
+public/jspm_packages/
 tools/traceur-compiler/
