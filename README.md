@@ -15,4 +15,4 @@ Set up Mongo
 Install TypeScript and Typings globally
 And JSPM
 
-jspm bundle app/main.ts public/bundle.js --minify --inject
+`npm run bundle`

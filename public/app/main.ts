@@ -3,7 +3,10 @@ import 'reflect-metadata';
 import Zone from 'zone.js';
 window.zone = Zone;
  
-import { bootstrap } from 'angular2/platform/browser';
-import { AppComponent } from './components/app.component';
- 
-bootstrap(AppComponent);
+import { bootstrap } from                       'angular2/platform/browser';
+import { AppComponent } from                    './app.component';
+import { APP_ROUTER_PROVIDERS } from            './app.routes';
+
+bootstrap(AppComponent, [ APP_ROUTER_PROVIDERS ] )
+    .catch(err => console.error(err))
+;

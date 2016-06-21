@@ -20,7 +20,7 @@ function load (app, fn){
   var partials                = traceur.require(__dirname + '/../routes/partials.js');
 
   app.get('/', dbg, home.index);
-  app.get('/characters/create', dbg, characters.create);
+  // app.get('/characters/create', dbg, characters.create);
 
   app.get('/partials/:name', partials.index);
 

@@ -5,6 +5,8 @@ html
       if title
         |  #{title}
       else
+
+    base(href=".")
       
     //- DataTables
     link(rel='stylesheet', href='/css/vendor/dataTables/dataTables.bootstrap.min.css')
@@ -12,17 +14,11 @@ html
     link(rel='stylesheet', href='/css/vendor/iCheck/minimal/orange.css')
     //- Select2
     link(rel='stylesheet', href='/css/vendor/select2/select2.min.css')
-    //- Style (Includes Bootstrap)
+    //- Style (Includes Bootstrap, FontAwesome)
     link(rel='stylesheet', href='/css/compiled/style.css')
 
   body
-    #wrapper
-      nav#nav
-
-      #content.container
-        block content
-
-      footer#footer
+    block content
 
     //- jQuery
     script(src="/js/vendor/jquery/jquery.min.js")

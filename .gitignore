@@ -1,6 +1,8 @@
 .DS_Store
 .tscache/
 
+npm-debug.log
+
 bower_components/
 node_modules/
 public/jspm_packages/
