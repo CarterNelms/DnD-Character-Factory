@@ -1,8 +1,9 @@
-import { Component }                from 'angular2/core';
-import { ROUTER_DIRECTIVES }        from 'angular2/router';
+import { Component }                from '@angular/core';
+import { ROUTER_DIRECTIVES }        from '@angular/router';
  
 @Component({
-    templateUrl: '/partials/characters/create',
+    // templateUrl: '/partials/index',
+    templateUrl: '/partials/characters/create.jade',
     directives: [ROUTER_DIRECTIVES]
 })
 
