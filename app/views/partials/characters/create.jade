@@ -1,1 +1,60 @@
-h2 Deleteme, routes work!
+.row
+  .col-xs-24
+    .panel.panel-primary
+      .panel-heading Ability Scores
+      .panel-body
+        .row
+          .col-sm-8
+            .row
+              .col-xs-24
+                h4 Method
+            .row
+              .col-xs-24
+                select#ability-score-method(name='ability-score-method' (change)="")
+                //-   option(*ngFor="let abilityRollMethod of abilityRollMethods" [value]="abilityRollMethod._id") {{abilityRollMethod.name}}
+            .row
+              .col-xs-24
+                hr
+                h4 Rules
+            //- #rules-na
+            //-   .row
+            //-     .col-xs-24 N/A
+            #ability-assignment
+              .row
+                .col-xs-24
+                  input#ability-score-assignment(type='checkbox' name='ability-score-assignment')
+                  label.m-l-5(for='ability-score-assignment') Fixed Order
+            .row.m-t-5
+              .col-xs-24
+                hr
+                button#roll-abilities-btn.btn.btn-primary.pull-right(type='button') Roll Abilities
+          .col-sm-16
+            .row
+              .col-xs-24
+                p
+                  b.ability-score-method-name()
+                  a.text-info(href='#')
+                    i.fa.fa-1x.fa-question-circle.m-l-5
+              .col-xs-24
+                table#abilities-table.table.table-striped.table-hover.nowrap
+                  thead
+                    tr
+                      th
+                      th Base Score
+                      th Race Bonus
+                      th Subrace Bonus
+                      th Class Bonus
+                      th Total Score
+                  tbody
+                    //- each ability in abilities
+                    //-   tr(id=ability.name)
+                    //-     td= ability.abbreviation
+                    //-     td.ability-base
+                    //-     td.ability-race-bonus 0
+                    //-     td.ability-subrace-bonus 0
+                    //-     td.ability-feat-bonus 0
+                    //-     td.ability-total
+
+script.
+  abilityRollMethods = !{JSON.stringify(abilityRollMethodsByID)};
+//- script(src="/js/compiled/characters/create.js")

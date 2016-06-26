@@ -1,11 +1,11 @@
 import { provideRouter, RouterConfig }          from '@angular/router';
 
-import { HomeComponent }                        from './home.component';
-import { CharacterCreateComponent }             from './characters/create.component';
+import { CharactersRoutes }                     from './characters/characters.routes';
+import { HomeRoutes }                           from './home.routes';
 
 export const routes: RouterConfig = [
-  { path: '', component: HomeComponent, useAsDefault: true },
-  { path: 'characters/create', component: CharacterCreateComponent }
+  ...CharactersRoutes,
+  ...HomeRoutes
 ];
 
 export const APP_ROUTER_PROVIDERS = [

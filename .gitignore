@@ -5,5 +5,7 @@ npm-debug.log
 
 bower_components/
 node_modules/
+public/bundle.js
+public/bundle.js.map
 public/jspm_packages/
 tools/traceur-compiler/

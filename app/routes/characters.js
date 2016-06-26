@@ -6,18 +6,35 @@ var AbilityRollMethod =             traceur.require(__dirname + '/../models/Abil
 var Class =                         traceur.require(__dirname + '/../models/Class.js');
 var Race =                          traceur.require(__dirname + '/../models/Race.js');
 
-exports.create = (req, res) => {
+// exports.create = (req, res) => {
+//   Race.find ({}).sort('name').exec((err, races) => {
+//     Class.find ({}).sort('name').exec((err, classes) => {
+//       Ability.find ({}).sort('order').exec((err, abilities) => {
+//         AbilityRollMethod.find ({}).sort('order').exec((err, abilityRollMethods) => {
+//           res.render('characters/create', {
+//             title: 'Create Character',
+//             races: races,
+//             classes: classes,
+//             abilities: abilities,
+//             abilityRollMethods: abilityRollMethods
+//           });
+//         });
+//       });
+//     });
+//   });
+// };
+
+exports.abilitiesInfo = (req, res) => {
   Race.find ({}).sort('name').exec((err, races) => {
     Class.find ({}).sort('name').exec((err, classes) => {
       Ability.find ({}).sort('order').exec((err, abilities) => {
         AbilityRollMethod.find ({}).sort('order').exec((err, abilityRollMethods) => {
-          res.render('characters/create', {
-            title: 'Create Character',
+          res.send(JSON.stringify({
             races: races,
             classes: classes,
             abilities: abilities,
             abilityRollMethods: abilityRollMethods
-          });
+          }));
         });
       });
     });

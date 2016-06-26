@@ -14,10 +14,12 @@ body {
 }
 
 #nav {
-  height: @header-height;
-  background-color: @brand-primary;
-  border-bottom: 4px solid @gray-darker;
-  padding: 10px;
+  border-bottom: @navbar-border-bottom;
+}
+
+.dropdown-menu {
+  border-top: @navbar-border-bottom;
+  border-color: @navbar-default-link-active-bg;
 }
 
 #content {

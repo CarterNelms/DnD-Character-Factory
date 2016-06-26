@@ -23,11 +23,11 @@
   "homepage": "https://github.com/CarterNelms/DnD-Character-Factory",
   "dependencies": {
     "express": "^4.13.4",
-    "jade": "^1.11.0",
     "less": "^2.7.1",
     "lodash": "^4.13.1",
     "mongodb": "^2.1.21",
-    "mongoose": "^4.4.20"
+    "mongoose": "^4.4.20",
+    "pug": "^2.0.0-beta3"
   },
   "devDependencies": {
     "grunt": "^1.0.1",

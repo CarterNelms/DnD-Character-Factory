@@ -14,13 +14,14 @@ module.exports = (req, res, next) => {
 };
 
 function load (app, fn){
-  // var characters              = traceur.require(__dirname + '/../routes/characters.js');
+  var characters              = traceur.require(__dirname + '/../routes/characters.js');
   // var error                   = traceur.require(__dirname + '/../routes/error.js');
   var home                    = traceur.require(__dirname + '/../routes/home.js');
   var partials                = traceur.require(__dirname + '/../routes/partials.js');
 
   app.get('/', dbg, home.index);
   // app.get('/characters/create', dbg, characters.create);
+  app.get('/characters/abilities-info', dbg, characters.abilitiesInfo);
 
   app.get('/partials/:name', partials.index);
   app.get('/partials/characters/:name', partials.characters);
