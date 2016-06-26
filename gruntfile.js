@@ -99,8 +99,8 @@ module.exports = function(grunt) {
           spawn: false
         }
       },
-      jade: {
-        files: ['app/views/**/*.jade'],
+      pug: {
+        files: ['app/views/**/*.pug'],
         options: {
           data: {
             debug: true,
@@ -117,7 +117,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-pug');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   // grunt.loadNpmTasks("grunt-systemjs-builder");

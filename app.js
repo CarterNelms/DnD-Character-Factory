@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/public'));
 
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'app/views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.use('/js/vendor', express.static(__dirname + '/js/vendor'));
 app.use('/css/vendor', express.static(__dirname + '/css/vendor'));
