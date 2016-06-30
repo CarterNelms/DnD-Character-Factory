@@ -1,0 +1,176 @@
+html,body {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+body {
+  // background-image: url('/lib/img/medieval_text_seamless_texture.png'); // Credit: http://jojo-ojoj.deviantart.com/art/Medieval-text-seamless-textures-png-507388917
+}
+
+#wrapper {
+  min-height:100%;
+  position:relative;
+}
+
+#nav {
+  border-bottom: @navbar-border-bottom;
+}
+
+.dropdown-menu {
+  border-top: @navbar-border-bottom;
+  border-color: @navbar-default-link-active-bg;
+}
+
+#content {
+  padding:10px;
+  padding-bottom: @footer-height; /* Height of the footer element */
+}
+
+#footer {
+  width:100%;
+  height: @footer-height;
+  position:absolute;
+  bottom:0;
+  left:0;
+  background-color: @gray-darker;
+}
+
+.select2-container {
+  width: 100% !important;
+
+  &.select2-container--disabled .select2-selection {
+    background-color: @input-bg-disabled;
+  }
+
+  .select2-selection__rendered {
+    color: @input-color !important;
+  }
+}
+
+.select2-container .select2-selection {
+  height: @input-height-base;
+  padding-top: 3px;
+
+  .select2-selection__arrow {
+    top: 4px;
+  }
+}
+
+.select2-container .select2-selection, .select2-dropdown {
+  border-color: @input-border;
+}
+
+.select2-container--default .select2-results__option[aria-selected] {
+  &[aria-selected='true'] {
+    background-color: @gray-lighter;
+    color: @gray-dark;
+  }
+
+  &.select2-results__option--highlighted {
+    background-color: @gray-dark;
+    color: @gray-lightest;
+  }
+}
+
+.select2-container .select2-selection .select2-selection__arrow b {
+  border-color: @input-color transparent transparent transparent;
+}
+
+.select2-container.select2-container--open .select2-selection .select2-selection__arrow b {
+  border-color: transparent transparent @input-color transparent;
+}
+
+// Table text alignment
+
+@text-alignments: left, right, center;
+@text-alignments-length: length(@text-alignments);
+
+.generate-table-text-align-classes(@m, @n: 1) when (@n =< @m) {
+  @alignment: extract(@text-alignments, @n);
+
+  .table {
+    &.dt-@{alignment} {
+      text-align: @alignment;
+
+      thead, tbody {
+        tr {
+          th, td {
+            text-align: @alignment;
+          }
+        }
+      }
+    }
+
+    thead, tbody {
+      &.dt-@{alignment} {
+        text-align: @alignment;
+
+        tr {
+          th, td {
+            text-align: @alignment;
+          }
+        }
+      }
+
+      tr {
+        &.dt-@{alignment} {
+          text-align: @alignment;
+
+          th, td {
+            text-align: @alignment;
+          }
+        }
+
+        th, td {
+          &.dt-@{alignment} {
+            text-align: @alignment !important;
+          }
+        }
+      }
+    }
+  }
+
+  .generate-table-text-align-classes(@m, (@n + 1));
+}
+
+.generate-table-text-align-classes(@text-alignments-length);
+
+// Utility Classes
+
+@directions: t top, b bottom, l left, r right, x left right, y top bottom, o top right bottom left;
+@directions-length: length(@directions);
+
+.friday (@d, @direction, @size, @d_index) when (@d_index > 1) {
+  @dir: extract(@direction, @d_index);
+
+  .p-@{d}-@{size} {
+    padding-@{dir}: @size*1px !important;
+  }
+
+  .m-@{d}-@{size} {
+    margin-@{dir}: @size*1px !important;
+  }
+
+  .friday(@d, @direction, @size, (@d_index - 1));
+}
+
+.generate-utility-classes-by-direction(@size, @length-index: 1) when (@length-index =< @directions-length) {
+  @direction: extract(@directions, @length-index);
+  @d: extract(@direction, 1);
+  @direction-length: length(@direction);
+
+  .friday (@d, @direction, @size, @direction-length);
+
+  .generate-utility-classes-by-direction(@size, (@length-index + 1));
+}
+
+.generate-utility-classes(@max-size, @size: 0) when (@size =< @max-size) {
+
+  .generate-utility-classes-by-direction(@size);
+
+  .generate-utility-classes(@max-size, (@size + 5));
+}
+
+.generate-utility-classes(30);
+

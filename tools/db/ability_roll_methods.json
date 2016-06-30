@@ -1,50 +1,68 @@
 [
     {
+        "_id":"custom",
         "name":"Custom Entry",
-        "description":"Manual Entry. Determine your scores yourself and enter them here. Values must be between 3 and 18. If you are entering numbers that you have rolled yourself, do NOT apply any bonuses to them from your race, your feats, or any other source. These will be added later.",
+        "description":"Manual Entry. Determine your scores yourself and enter them here. Values must be between 3 and 18. If you are entering numbers that you have rolled yourself, do NOT apply any bonuses to them from your race, your feats, or any other source. Bonus will be added later.",
         "order":100,
-        "isOfficial":false,
-        "assignment":"Fixed",
-        "isRollable":false
+        "is_official":false,
+        "is_rollable":false,
+        "is_orderability_optional": false,
+        "is_orderable": false,
+        "is_editable": true
     },
     {
+        "_id":"3d6",
         "name":"3d6",
         "description":"Roll 3d6 for each ability. The sums of each roll are your ability scores. This will generally yield characters who are slightly weaker than average, and will very rarely produce characters without any glaring weaknesses.",
         "order":30,
-        "isOfficial":false,
-        "assignment":"",
-        "isRollable":true
+        "is_official":false,
+        "is_rollable":true,
+        "is_orderability_optional": true,
+        "is_orderable": true,
+        "is_editable": false
     },
     {
+        "_id":"4d6",
         "name":"4d6 Best 3",
         "description":"Roll 4d6 for each ability. Drop the die with lowest number from each roll. The sums of the other three dice are your ability scores. This is the official method for randomizing a character's attributes and will generally yield average characters.",
         "order":40,
-        "isOfficial":true,
-        "assignment":"",
-        "isRollable":true
+        "is_official":true,
+        "is_rollable":true,
+        "is_orderability_optional": true,
+        "is_orderable": true,
+        "is_editable": false
     },
     {
+        "_id":"5d6",
         "name":"5d6 Best 3",
         "description":"Roll 5d6 for each ability. Drop the dice with the lowest two numbers from each roll. The sums of the other three dice are your ability scores. This method will generally yield characters who are stronger than most.",
         "order":50,
-        "isOfficial":false,
-        "assignment":"",
-        "isRollable":true
+        "is_official":false,
+        "is_rollable":true,
+        "is_orderability_optional": true,
+        "is_orderable": true,
+        "is_editable": false
     },
     {
+        "_id":"standard_array",
         "name":"Standard Array",
         "description":"Your scores are 15, 14, 13, 12, 10, 8. You may assign them however you wish.",
         "order":10,
-        "isOfficial":true,
-        "assignment":"Choose",
-        "isRollable":false
+        "is_official":true,
+        "is_rollable":false,
+        "is_orderability_optional": false,
+        "is_orderable": true,
+        "is_editable": false
     },
     {
+        "_id":"point_buy",
         "name":"Point Buy",
         "description":"You have 27 points with which to buy attributes. Scores of up to 8 are free. Scores of up to 13 cost 1 point per value over 8, i.e. a 9 costs 1 point, a 10 costs 2 points, an 11 costs 3 points, etc. Scores over 13 cost twice as much per value, i.e. a 14 costs 7 points (5 for each value over 8 up to 13, plus 2 more points to increase the score to 14), a 15 costs 9 points, etc. Ability scores cannot exceed 15 with this method.",
         "order":20,
-        "isOfficial":true,
-        "assignment":"Fixed",
-        "isRollable":false
+        "is_official":true,
+        "is_rollable":false,
+        "is_orderability_optional": false,
+        "is_orderable": false,
+        "is_editable": true
     }
 ]

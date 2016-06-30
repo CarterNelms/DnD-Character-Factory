@@ -1,10 +1,12 @@
-import { provideRouter, RouterConfig }          from '@angular/router';
+import { provideRouter, RouterConfig } from '@angular/router';
 
-import { CharactersRoutes }                     from './characters/characters.routes';
-import { HomeRoutes }                           from './home.routes';
+import { CharactersRoutes } from './characters/characters.routes';
+import { CommonRoutes } from './common/common.routes';
+import { HomeRoutes } from './home.routes';
 
 export const routes: RouterConfig = [
   ...CharactersRoutes,
+  ...CommonRoutes,
   ...HomeRoutes
 ];
 

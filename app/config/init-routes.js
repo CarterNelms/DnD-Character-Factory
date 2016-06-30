@@ -25,6 +25,7 @@ function load (app, fn){
 
   app.get('/partials/:name', partials.index);
   app.get('/partials/characters/:name', partials.characters);
+  app.get('/partials/common/:name', partials.common);
 
   // app.get('*', dbg, error['404']);
 

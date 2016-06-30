@@ -3,8 +3,8 @@
 var traceur = require('traceur');
 var Ability =                       traceur.require(__dirname + '/../models/Ability.js');
 var AbilityRollMethod =             traceur.require(__dirname + '/../models/AbilityRollMethod.js');
-var Class =                         traceur.require(__dirname + '/../models/Class.js');
-var Race =                          traceur.require(__dirname + '/../models/Race.js');
+// var Class =                         traceur.require(__dirname + '/../models/Class.js');
+// var Race =                          traceur.require(__dirname + '/../models/Race.js');
 
 // exports.create = (req, res) => {
 //   Race.find ({}).sort('name').exec((err, races) => {
@@ -25,18 +25,18 @@ var Race =                          traceur.require(__dirname + '/../models/Race
 // };
 
 exports.abilitiesInfo = (req, res) => {
-  Race.find ({}).sort('name').exec((err, races) => {
-    Class.find ({}).sort('name').exec((err, classes) => {
+  // Race.find ({}).sort('name').exec((err, races) => {
+    // Class.find ({}).sort('name').exec((err, classes) => {
       Ability.find ({}).sort('order').exec((err, abilities) => {
         AbilityRollMethod.find ({}).sort('order').exec((err, abilityRollMethods) => {
           res.send(JSON.stringify({
-            races: races,
-            classes: classes,
+            // races: races,
+            // classes: classes,
             abilities: abilities,
             abilityRollMethods: abilityRollMethods
           }));
         });
       });
-    });
-  });
+    // });
+  // });
 };

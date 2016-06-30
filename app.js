@@ -18,8 +18,9 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'pug');
 
-app.use('/js/vendor', express.static(__dirname + '/js/vendor'));
-app.use('/css/vendor', express.static(__dirname + '/css/vendor'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
 app.use(initMongo.connect);
 app.use(initRoutes);
 

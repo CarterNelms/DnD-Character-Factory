@@ -5,3 +5,15 @@
     router-outlet
 
   include ../includes/footer
+
+#help-modal.modal.fade(tabindex="-1")
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') ×
+        h4.modal-title {{modals.help.header}}
+      .modal-body
+        p {{modals.help.body}}
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') Close

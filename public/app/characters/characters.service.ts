@@ -1,10 +1,10 @@
-import { Injectable }                 from '@angular/core';
-import { Http, Response }             from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Http, Response } from "@angular/http";
 
-import { Observable }     from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class CharacterService{
+export class CharactersService{
   private abilities: [];
 
   constructor (private http: Http) { }

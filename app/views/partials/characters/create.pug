@@ -7,36 +7,29 @@
           .col-sm-8
             .row
               .col-xs-24
-                h4 Method
+                h4.pull-left Method
+                help.m-t-10.pull-right('[header]'="'Roll Method: ' + abilities.roll_method.name" '[body]'="abilities.roll_method.description" '[text]'="'Explain ' + abilities.roll_method.name")
             .row
               .col-xs-24
-                select#ability-score-method(name='ability-score-method' (change)="")
-                //-   option(*ngFor="let abilityRollMethod of abilityRollMethods" [value]="abilityRollMethod._id") {{abilityRollMethod.name}}
-            .row
+                select.form-control('(change)'="setAbilityRollMethod($event.target.value)")
+                  option(*ngFor="let method of abilities.roll_methods; let i = index" '[value]'="i") {{method.name}}
+            .row.m-t-20(*ngIf="abilities.roll_method.is_orderability_optional")
               .col-xs-24
-                hr
-                h4 Rules
-            //- #rules-na
-            //-   .row
-            //-     .col-xs-24 N/A
-            #ability-assignment
-              .row
+                input#ability-score-orderable(type='checkbox' name='ability-score-orderable' '[checked]'="!abilities.rules.is_orderable" '(change)'="setAbilityScoreOrderability(!$event.target.checked)")
+                label.m-l-5(for='ability-score-orderable') Fixed Order
+            div(*ngIf="abilities.roll_method.is_rollable")
+              .row.m-t-5
                 .col-xs-24
-                  input#ability-score-assignment(type='checkbox' name='ability-score-assignment')
-                  label.m-l-5(for='ability-score-assignment') Fixed Order
-            .row.m-t-5
-              .col-xs-24
-                hr
-                button#roll-abilities-btn.btn.btn-primary.pull-right(type='button') Roll Abilities
+                  hr
+              .row
+                .col-xs-12
+                  help.m-t-5.pull-left(*ngIf="areAbilityScoresSet()" '[header]'="'Ability Roll Statistics'" '[body]'="abilities.roll_method.description" '[text]'="'View Roll Statistics'")
+                .col-xs-12
+                  button.btn.btn-primary.pull-right(type='button' '(click)'="rollAbilities()") Roll Abilities
           .col-sm-16
             .row
               .col-xs-24
-                p
-                  b.ability-score-method-name()
-                  a.text-info(href='#')
-                    i.fa.fa-1x.fa-question-circle.m-l-5
-              .col-xs-24
-                table#abilities-table.table.table-striped.table-hover.nowrap
+                table#abilities-table.table.table-striped.table-hover.nowrap.dt-center
                   thead
                     tr
                       th
@@ -44,17 +37,31 @@
                       th Race Bonus
                       th Subrace Bonus
                       th Class Bonus
+                      th Feat Bonus
                       th Total Score
+                      th Modifier
                   tbody
-                    //- each ability in abilities
-                    //-   tr(id=ability.name)
-                    //-     td= ability.abbreviation
-                    //-     td.ability-base
-                    //-     td.ability-race-bonus 0
-                    //-     td.ability-subrace-bonus 0
-                    //-     td.ability-feat-bonus 0
-                    //-     td.ability-total
-
-script.
-  abilityRollMethods = !{JSON.stringify(abilityRollMethodsByID)};
-//- script(src="/js/compiled/characters/create.js")
+                    tr(*ngFor="let ability of abilities.abilities; let i = index" class="{{ability.name.toLowerCase()}}-row")
+                      td.dt-left {{ability.abbreviation}}
+                      td
+                        .row
+                          .p-o-0(class="col-xs-{{abilities.roll_method.is_editable || abilities.rules.is_orderable ? 12 : 24}}") {{abilities.scores[i] | ability_score:'-'}}
+                          .col-xs-12.p-o-0(*ngIf="abilities.roll_method.is_editable")
+                            .pull-left
+                              button.btn.btn-xs.btn-danger('(mousedown)'="incrementAbilityScoreHold(i, -1)" '(mouseup)'="incrementAbilityScoreCancel()" '(mouseout)'="incrementAbilityScoreCancel()")
+                                i.fa.fa-minus
+                              button.btn.btn-xs.btn-success.m-l-5('(mousedown)'="incrementAbilityScoreHold(i, 1)" '(mouseup)'="incrementAbilityScoreCancel()" '(mouseout)'="incrementAbilityScoreCancel()")
+                                i.fa.fa-plus
+                          .col-xs-12.p-o-0(*ngIf="abilities.rules.is_orderable")
+                            .pull-left
+                              span(*ngIf="abilities.rules.is_orderable")
+                                button.btn.btn-xs.btn-info('(click)'="swapAbilityScore(i, i + 1)")
+                                  i.fa.fa-chevron-down
+                                button.btn.btn-xs.btn-info.m-l-5('(click)'="swapAbilityScore(i, i - 1)")
+                                  i.fa.fa-chevron-up
+                      td
+                      td
+                      td
+                      td
+                      td {{abilities.scores[i] | ability_score}}
+                      td {{abilities.scores[i] | ability_modifier}}
