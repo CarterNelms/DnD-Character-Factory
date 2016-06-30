@@ -1,0 +1,65 @@
+.panel.panel-primary
+  .panel-heading Ability Scores
+  .panel-body
+    .row
+      .col-sm-8
+        .row
+          .col-xs-24
+            h4.pull-left Method
+            help.m-t-10.pull-right('[header]'="roll_method.name" '[body]'="roll_method.description" '[text]'="'Explain ' + roll_method.name")
+        .row
+          .col-xs-24
+            select.form-control('(change)'="setRollMethod($event.target.value)")
+              option(*ngFor="let method of roll_methods; let i = index" '[value]'="i") {{method.name}}
+        .row.m-t-20(*ngIf="roll_method.is_orderability_optional")
+          .col-xs-24
+            input#ability-score-orderable(type='checkbox' name='ability-score-orderable' '[checked]'="!rules.is_orderable" '(change)'="setOrderability(!$event.target.checked)")
+            label.m-l-5(for='ability-score-orderable') Fixed Order
+        div(*ngIf="roll_method.is_rollable")
+          .row.m-t-5
+            .col-xs-24
+              hr
+          .row
+            .col-xs-12
+              help.m-t-5.pull-left(*ngIf="areScoresSet()" '[header]'="'Ability Roll Statistics'" '[body]'="roll_method.description" '[text]'="'View Roll Statistics'")
+            .col-xs-12
+              button.btn.btn-primary.pull-right(type='button' '(click)'="roll(4)") Roll Abilities
+      .col-sm-16
+        .row
+          .col-xs-24
+            table#abilities-table.table.table-striped.table-hover.nowrap.dt-center
+              thead
+                tr
+                  th
+                  th Base Score
+                  th Race Bonus
+                  th Subrace Bonus
+                  th Class Bonus
+                  th Feat Bonus
+                  th Total Score
+                  th Modifier
+              tbody
+                tr(*ngFor="let ability of abilities; let i = index" class="{{ability.name.toLowerCase()}}-row")
+                  td.dt-left {{ability.abbreviation}}
+                  td
+                    .row
+                      .p-o-0(class="col-xs-{{roll_method.is_editable || rules.is_orderable ? 12 : 24}}") {{scores[i] | ability_score:'-'}}
+                      .col-xs-12.p-o-0(*ngIf="roll_method.is_editable")
+                        .pull-left
+                          button.btn.btn-xs.btn-danger('(mousedown)'="incrementScoreHold(i, -1)" '(mouseup)'="incrementScoreCancel()" '(mouseout)'="incrementScoreCancel()")
+                            i.fa.fa-minus
+                          button.btn.btn-xs.btn-success.m-l-5('(mousedown)'="incrementScoreHold(i, 1)" '(mouseup)'="incrementScoreCancel()" '(mouseout)'="incrementScoreCancel()")
+                            i.fa.fa-plus
+                      .col-xs-12.p-o-0(*ngIf="rules.is_orderable")
+                        .pull-left
+                          span(*ngIf="rules.is_orderable")
+                            button.btn.btn-xs.btn-info('(click)'="swapScores(i, i + 1)")
+                              i.fa.fa-chevron-down
+                            button.btn.btn-xs.btn-info.m-l-5('(click)'="swapScores(i, i - 1)")
+                              i.fa.fa-chevron-up
+                  td
+                  td
+                  td
+                  td
+                  td {{scores[i] | ability_score}}
+                  td {{scores[i] | ability_modifier}}

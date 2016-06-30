@@ -4,25 +4,31 @@ import { Http, Response } from "@angular/http";
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class CharactersService{
-  private abilities: [];
+export class AbilitiesService{
+  private info: [];
 
-  constructor (private http: Http) { }
+  public max_base_score: number;
+  public min_base_score: number;
 
-  getAbilitiesInfo (fn) {
-    if (this.abilities != null) {
-      fn(this.abilities);
+  constructor (private http: Http) {
+    this.min_base_score = 3;
+    this.max_base_score = 18;
+  }
+
+  getInfo (fn) {
+    if (this.info != null) {
+      fn(this.info);
       console.log('No DB call required!!');
       return;
     }
 
-    this.http.get('/characters/abilities-info')
+    this.http.get('/abilities/get-info')
       .map(response => response.json())
       // .catch(x => console.log(x))
       .subscribe(
         result => {
-          this.abilities = result;
-          fn(this.abilities);
+          this.info = result;
+          fn(this.info);
         },
         this.handleError
       )

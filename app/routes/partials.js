@@ -5,6 +5,11 @@ exports.index = (req, res) => {
   res.render('partials/' + name, {});
 };
 
+exports.abilities = (req, res) => {
+  var name = req.params.name;
+  res.render('partials/abilities/' + name, {});
+};
+
 exports.characters = (req, res) => {
   var name = req.params.name;
   res.render('partials/characters/' + name, {});

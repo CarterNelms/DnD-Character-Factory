@@ -11,20 +11,9 @@
         "is_editable": true
     },
     {
-        "_id":"3d6",
-        "name":"3d6",
-        "description":"Roll 3d6 for each ability. The sums of each roll are your ability scores. This will generally yield characters who are slightly weaker than average, and will very rarely produce characters without any glaring weaknesses.",
-        "order":30,
-        "is_official":false,
-        "is_rollable":true,
-        "is_orderability_optional": true,
-        "is_orderable": true,
-        "is_editable": false
-    },
-    {
-        "_id":"4d6",
-        "name":"4d6 Best 3",
-        "description":"Roll 4d6 for each ability. Drop the die with lowest number from each roll. The sums of the other three dice are your ability scores. This is the official method for randomizing a character's attributes and will generally yield average characters.",
+        "_id":"roll",
+        "name":"Dice Roll",
+        "description":"Roll 3d6 or more for each ability. The sums of the three highest dice values per roll are your ability scores. With four dice per roll, this method is the official method for randomizing a character's attributes.",
         "order":40,
         "is_official":true,
         "is_rollable":true,
@@ -33,20 +22,9 @@
         "is_editable": false
     },
     {
-        "_id":"5d6",
-        "name":"5d6 Best 3",
-        "description":"Roll 5d6 for each ability. Drop the dice with the lowest two numbers from each roll. The sums of the other three dice are your ability scores. This method will generally yield characters who are stronger than most.",
-        "order":50,
-        "is_official":false,
-        "is_rollable":true,
-        "is_orderability_optional": true,
-        "is_orderable": true,
-        "is_editable": false
-    },
-    {
         "_id":"standard_array",
         "name":"Standard Array",
-        "description":"Your scores are 15, 14, 13, 12, 10, 8. You may assign them however you wish.",
+        "description":"Your scores are 15, 14, 13, 12, 10, 8.",
         "order":10,
         "is_official":true,
         "is_rollable":false,

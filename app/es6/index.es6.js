@@ -1,3 +1,3 @@
 $(() => {
-  System.import('app/main').catch(function(err){ console.error(err); });
+  System.import('app/main').catch((err) => { console.error(err); });
 });
