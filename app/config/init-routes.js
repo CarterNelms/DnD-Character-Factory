@@ -22,11 +22,11 @@ function load (app, fn){
 
   app.get('/', dbg, home.index);
   // app.get('/characters/create', dbg, characters.create);
-  app.get('/abilities/get-info', dbg, abilities.getInfo);
+  app.get('/characters/abilities/get-info', dbg, abilities.getInfo);
 
   app.get('/partials/:name', partials.index);
-  app.get('/partials/abilities/:name', partials.abilities);
   app.get('/partials/characters/:name', partials.characters);
+  app.get('/partials/characters/abilities/:name', partials.abilities);
   app.get('/partials/common/:name', partials.common);
 
   // app.get('*', dbg, error['404']);

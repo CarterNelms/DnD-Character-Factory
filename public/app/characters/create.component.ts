@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
  
-import { AbilitiesRollComponent } from '../abilities/abilities.component';
+import { AbilitiesRollComponent } from './abilities/abilities.component';
 
 @Component({
     templateUrl: '/partials/characters/create',

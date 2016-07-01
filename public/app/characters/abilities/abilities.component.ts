@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
-import { HelpComponent } from '../common/help.component';
+import { HelpComponent } from '../../common/help.component';
 
 import { AbilitiesService } from './abilities.service';
 
@@ -10,7 +10,7 @@ import { AbilityModifierPipe } from './ability_modifier.pipe';
  
 @Component({
     selector: 'ability-scores-roll',
-    templateUrl: '/partials/abilities/roll',
+    templateUrl: '/partials/characters/abilities/roll',
     directives: [ROUTER_DIRECTIVES, HelpComponent],
     providers: [AbilitiesService],
     pipes: [AbilityScorePipe, AbilityModifierPipe]
@@ -58,7 +58,6 @@ export class AbilitiesRollComponent {
         }, 0);
       },
       hasExceededMax: (scores = this.scores) => {
-        console.log(this.points.getUsed(scores));
         return this.points.getUsed(scores) > this.points.max;
       },
       price_increase_scores: [13,15],

@@ -22,7 +22,7 @@ export class AbilitiesService{
       return;
     }
 
-    this.http.get('/abilities/get-info')
+    this.http.get('/characters/abilities/get-info')
       .map(response => response.json())
       // .catch(x => console.log(x))
       .subscribe(

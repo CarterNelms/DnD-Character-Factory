@@ -7,7 +7,7 @@ exports.index = (req, res) => {
 
 exports.abilities = (req, res) => {
   var name = req.params.name;
-  res.render('partials/abilities/' + name, {});
+  res.render('partials/characters/abilities/' + name, {});
 };
 
 exports.characters = (req, res) => {
