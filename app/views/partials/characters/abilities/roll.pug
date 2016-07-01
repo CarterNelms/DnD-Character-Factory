@@ -11,6 +11,9 @@
           .col-xs-24
             select.form-control('(change)'="setRollMethod($event.target.value)")
               option(*ngFor="let method of roll_methods; let i = index" '[value]'="i") {{method.name}}
+        .row.m-t-20(*ngIf="roll_method._id === 'point_buy'")
+          .col-xs-24
+            p Points: {{points.getUsed()}} / {{points.max}}
         .row.m-t-20(*ngIf="roll_method.is_orderability_optional")
           .col-xs-24
             input#ability-score-orderable(type='checkbox' name='ability-score-orderable' '[checked]'="!rules.is_orderable" '(change)'="setOrderability(!$event.target.checked)")
