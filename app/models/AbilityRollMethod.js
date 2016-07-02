@@ -6,7 +6,7 @@ var collectionName = 'ability_roll_method';
 
 var mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
+var Schema = new mongoose.Schema({
   _id: { type: String, required: true },
   name: { type: String, required: true },
   description: { type: String, default: '', required: true },
@@ -18,6 +18,6 @@ var schema = new mongoose.Schema({
   is_editable: { type: Boolean, required: true }
 });
 
-var Model = mongoose.model(collectionName, schema);
+var Model = mongoose.model(collectionName, Schema);
 
 module.exports = Model;

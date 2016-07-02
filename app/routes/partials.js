@@ -19,3 +19,8 @@ exports.common = (req, res) => {
   var name = req.params.name;
   res.render('partials/common/' + name, {});
 };
+
+exports.races = (req, res) => {
+  var name = req.params.name;
+  res.render('partials/characters/races/' + name, {});
+};

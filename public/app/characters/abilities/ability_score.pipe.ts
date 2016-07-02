@@ -26,8 +26,12 @@ export class AbilityScorePipe implements PipeTransform {
   constructor(private service: AbilitiesService) { }
 
   transform(val: number, empty: string = ''): number {
-    let min = this.service.min_base_score - 1,
-    max = this.service.max_base_score;
+    if (val == null) {
+      return empty;
+    }
+
+    let min = this.service.min_score - 1,
+    max = this.service.max_score;
 
     val = _.clamp(Math.floor(val), min, max);
 

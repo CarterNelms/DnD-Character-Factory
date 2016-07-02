@@ -1,30 +1,36 @@
 [
     {
+        "_id":"strength",
         "name":"Strength",
         "abbreviation":"Str",
         "order":"1"
     },
     {
+        "_id":"dexterity",
         "name":"Dexterity",
         "abbreviation":"Dex",
         "order":"2"
     },
     {
+        "_id":"constitution",
         "name":"Consitution",
         "abbreviation":"Con",
         "order":"3"
     },
     {
+        "_id":"intelligence",
         "name":"Intelligence",
         "abbreviation":"Int",
         "order":"4"
     },
     {
+        "_id":"wisdom",
         "name":"Wisdom",
         "abbreviation":"Wis",
         "order":"5"
     },
     {
+        "_id":"charisma",
         "name":"Charisma",
         "abbreviation":"Cha",
         "order":"6"

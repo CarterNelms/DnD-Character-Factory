@@ -9,8 +9,8 @@
             help.m-t-10.pull-right('[header]'="roll_method.name" '[body]'="roll_method.description" '[text]'="'Explain ' + roll_method.name")
         .row
           .col-xs-24
-            select.form-control('(change)'="setRollMethod($event.target.value)")
-              option(*ngFor="let method of roll_methods; let i = index" '[value]'="i") {{method.name}}
+            select.form-control('[ngModel]'="roll_method" '(ngModelChange)'="setRollMethod($event)")
+              option(*ngFor="let method of roll_methods" '[ngValue]'="method") {{method.name}}
         .row.m-t-20(*ngIf="roll_method._id === 'point_buy'")
           .col-xs-24
             p Points: {{points.getUsed()}} / {{points.max}}
@@ -37,7 +37,6 @@
                   th Base Score
                   th Race Bonus
                   th Subrace Bonus
-                  th Class Bonus
                   th Feat Bonus
                   th Total Score
                   th Modifier
@@ -46,23 +45,22 @@
                   td.dt-left {{ability.abbreviation}}
                   td
                     .row
-                      .p-o-0(class="col-xs-{{roll_method.is_editable || rules.is_orderable ? 12 : 24}}") {{scores[i] | ability_score:'-'}}
+                      .p-o-0(class="col-xs-{{roll_method.is_editable || rules.is_orderable ? 12 : 24}}") {{scores[ability._id] | ability_score:'-'}}
                       .col-xs-12.p-o-0(*ngIf="roll_method.is_editable")
                         .pull-left
-                          button.btn.btn-xs.btn-danger('(mousedown)'="incrementScoreHold(i, -1)" '(mouseup)'="incrementScoreCancel()" '(mouseout)'="incrementScoreCancel()")
+                          button.btn.btn-xs.btn-danger('(mousedown)'="incrementScoreHold(ability._id, -1)" '(mouseup)'="incrementScoreCancel()" '(mouseout)'="incrementScoreCancel()")
                             i.fa.fa-minus
-                          button.btn.btn-xs.btn-success.m-l-5('(mousedown)'="incrementScoreHold(i, 1)" '(mouseup)'="incrementScoreCancel()" '(mouseout)'="incrementScoreCancel()")
+                          button.btn.btn-xs.btn-success.m-l-5('(mousedown)'="incrementScoreHold(ability._id, 1)" '(mouseup)'="incrementScoreCancel()" '(mouseout)'="incrementScoreCancel()")
                             i.fa.fa-plus
                       .col-xs-12.p-o-0(*ngIf="rules.is_orderable")
                         .pull-left
                           span(*ngIf="rules.is_orderable")
-                            button.btn.btn-xs.btn-info('(click)'="swapScores(i, i + 1)")
+                            button.btn.btn-xs.btn-info('(click)'="swapScores(ability._id, i + 1)")
                               i.fa.fa-chevron-down
-                            button.btn.btn-xs.btn-info.m-l-5('(click)'="swapScores(i, i - 1)")
+                            button.btn.btn-xs.btn-info.m-l-5('(click)'="swapScores(ability._id, i - 1)")
                               i.fa.fa-chevron-up
+                  td {{bonuses.race[ability._id] | ability_bonus}}
+                  td {{bonuses.subrace[ability._id] | ability_bonus}}
                   td
-                  td
-                  td
-                  td
-                  td {{scores[i] | ability_score}}
-                  td {{scores[i] | ability_modifier}}
+                  td {{getTotalScore(ability._id) | ability_score}}
+                  td {{getTotalScore(ability._id) | ability_modifier}}

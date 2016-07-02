@@ -6,10 +6,10 @@ var collectionName = 'class';
 
 var mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
+var Schema = new mongoose.Schema({
     name: { type: String, required: true }
 });
 
-var Model = mongoose.model(collectionName, schema);
+var Model = mongoose.model(collectionName, Schema);
 
 module.exports = Model;

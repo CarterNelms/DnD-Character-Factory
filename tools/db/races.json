@@ -1,29 +1,53 @@
 [
-    {
-        "name":"Dwarf"
+  {
+    "_id":"dwarf",
+    "name":"Dwarf",
+    "traits": {
+      "ability_score_increase": [
+        {
+          "ability_id":"constitution",
+          "increase":2
+        }
+      ]
     },
-    {
-        "name":"Elf"
+    "subraces": [
+      {
+        "_id":"hill_dwarf",
+        "name":"Hill Dwarf",
+        "traits":{
+          "ability_score_increase": [
+            {
+              "ability_id":"wisdom",
+              "increase":1
+            }
+          ]
+        }
+      },
+      {
+        "_id":"mountain_dwarf",
+        "name":"Mountain Dwarf",
+        "traits":{
+          "ability_score_increase": [
+            {
+              "ability_id":"strength",
+              "increase":2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "_id":"elf",
+    "name":"Elf",
+    "traits": {
+      "ability_score_increase": [
+        {
+          "ability_id":"dexterity",
+          "increase":2
+        }
+      ]
     },
-    {
-        "name":"Halfling"
-    },
-    {
-        "name":"Human"
-    },
-    {
-        "name":"Dragonborn"
-    },
-    {
-        "name":"Gnome"
-    },
-    {
-        "name":"Half-Elf"
-    },
-    {
-        "name":"Half-Orc"
-    },
-    {
-        "name":"Tiefling"
-    }
+    "subraces": []
+  }
 ]

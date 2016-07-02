@@ -4,20 +4,23 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { HelpComponent } from '../../common/help.component';
 
 import { AbilitiesService } from './abilities.service';
+import { CharacterCreateService } from '../create.service';
 
-import { AbilityScorePipe } from './ability_score.pipe';
+import { AbilityBonusPipe } from './ability_bonus.pipe';
 import { AbilityModifierPipe } from './ability_modifier.pipe';
+import { AbilityScorePipe } from './ability_score.pipe';
  
 @Component({
-    selector: 'ability-scores-roll',
-    templateUrl: '/partials/characters/abilities/roll',
-    directives: [ROUTER_DIRECTIVES, HelpComponent],
-    providers: [AbilitiesService],
-    pipes: [AbilityScorePipe, AbilityModifierPipe]
+  selector: 'ability-scores-roll',
+  templateUrl: '/partials/characters/abilities/roll',
+  directives: [ROUTER_DIRECTIVES, HelpComponent],
+  providers: [AbilitiesService],
+  pipes: [AbilityBonusPipe, AbilityModifierPipe, AbilityScorePipe]
 })
 
 export class AbilitiesRollComponent {
   public abilities;
+  public bonuses;
   public points;
   public roll_method;
   public roll_methods;
@@ -26,10 +29,11 @@ export class AbilitiesRollComponent {
 
   private event_timer;
 
-  constructor(private service: AbilitiesService) { }
+  constructor(private service: AbilitiesService, private character_create_service: CharacterCreateService) { }
 
   ngOnInit() {
     this.abilities = [];
+    this.bonuses = this.character_create_service.abilities.bonuses;
     this.points = {
       getUsed: (scores = this.scores) => {
         let price_increase_scores = _.clone(this.points.price_increase_scores);
@@ -70,40 +74,50 @@ export class AbilitiesRollComponent {
       min: this.service.min_base_score,
       max: this.service.max_base_score
     };
-    this.scores = [0,0,0,0,0,0];
+    this.scores = {};
 
     this.service.getInfo(info => {
       this.abilities = info.abilities;
       this.roll_methods = info.ability_roll_methods;
 
-      this.setRollMethod(0);
+      this.setRollMethod(this.roll_methods[0]);
     });
   }
 
-  setRollMethod (index) {
-    this.roll_method = this.roll_methods[index];
+  setRollMethod (method) {
+    this.roll_method = method;
 
     this.rules.min = this.service.min_base_score;
     this.rules.max = this.service.max_base_score;
 
+    let scores = null;
+
     switch (this.roll_method._id) {
       case "point_buy":
-        this.scores = [8,8,8,8,8,8];
+        scores = [8,8,8,8,8,8];
         this.rules.min = 8;
         this.rules.max = 15;
         break;
       case "custom":
         break;
       case "roll":
-        this.scores = [0,0,0,0,0,0];
+        scores = [0,0,0,0,0,0];
         break;
       case "standard_array":
       default:
-        this.scores = [15,14,13,12,10,8];
+        scores = [15,14,13,12,10,8];
         break;
     }
 
     this.setOrderability(this.roll_method.is_orderable);
+
+    if (!Array.isArray(scores)) {
+      return;
+    }
+
+    this.abilities.forEach(ability => {
+      this.scores[ability._id] = scores.length === 0 ? 8 : scores.shift();
+    });
   }
 
   roll (dice_count: number) {
@@ -126,13 +140,9 @@ export class AbilitiesRollComponent {
       return;
     }
 
-    let abilities_count = this.abilities.length;
-
-    for (let i = 0; i < abilities_count; i++) {
-      let rollResults = this.rollScore(dice_count);
-
-      this.scores[i] = rollResults.score;
-    }
+    this.abilities.forEach(ability => {
+      this.scores[ability._id] = this.rollScore(dice_count);
+    });
   }
 
   setOrderability (is_orderable) {
@@ -166,43 +176,40 @@ export class AbilitiesRollComponent {
   }
 
   areScoresSet () {
-    let scores = this.scores;
+    let scores = this.scores,
+    total_score = 0,
+    score_count = 0;
 
-    if (!(scores.length === 6 && Array.isArray(scores))) {
-      return false;
-    }
+    _(scores).forEach((score) => {
+      score_count++;
+      total_score += score;
+    });
 
-    if (_.max(scores) === 0) {
-      return false;
-    }
-
-    return true;
+    return !(score_count < this.abilities.length || total_score === 0);
   }
 
-  swapScores (i1: number, i2: number) {
-    let last_index = this.scores.length - 1;
+  swapScores (ability_id: string, dest_index: any) {
+    if (typeof dest_index === 'number') {
+      let last_index = this.abilities.length - 1;
 
-    if (i1 < 0) {
-      i1 = last_index;
-    } else if (i1 > last_index) {
-      i1 = 0;
+      if (dest_index < 0) {
+        dest_index = last_index;
+      } else if (dest_index > last_index) {
+        dest_index = 0;
+      }
+
+      dest_index = this.abilities[dest_index]._id;
     }
 
-    if (i2 < 0) {
-      i2 = last_index;
-    } else if (i2 > last_index) {
-      i2 = 0;
-    }
-
-    if (i1 == i2) {
+    if (ability_id === dest_index || !(_.find(this.abilities, { _id: dest_index }))) {
       return;
     }
 
     let scores = this.scores,
-    tmp = scores[i2];
+    tmp = scores[dest_index];
 
-    scores[i2] = scores[i1];
-    scores[i1] = tmp;
+    scores[dest_index] = scores[ability_id];
+    scores[ability_id] = tmp;
   }
 
   private incrementScore (i: number, n: number) {
@@ -251,5 +258,12 @@ export class AbilitiesRollComponent {
 
   incrementScoreCancel () {
     clearInterval(this.event_timer);
+  }
+
+  getTotalScore (ability_id) {
+    return this.scores[ability_id]
+      + (this.bonuses.race[ability_id] | 0)
+      + (this.bonuses.subrace[ability_id] | 0)
+    ;
   }
 }

@@ -4,33 +4,23 @@ import { Http, Response } from "@angular/http";
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class AbilitiesService{
-  private info;
+export class RacesService{
+  private races;
 
-  public min_base_score: number;
-  public max_base_score: number;
-  public min_score: number;
-  public max_score: number;
+  constructor (private http: Http) { }
 
-  constructor (private http: Http) {
-    this.min_base_score = 3;
-    this.max_base_score = 18;
-    this.min_score = this.min_base_score;
-    this.max_score = 20;
-  }
-
-  getInfo (fn) {
-    if (this.info != null) {
-      fn(this.info);
+  getRaces (fn) {
+    if (this.races != null) {
+      fn(this.races);
       return;
     }
 
-    this.http.get('/characters/abilities/get-info')
+    this.http.get('/characters/races/get')
       .map(response => response.json())
       .subscribe(
         result => {
-          this.info = result;
-          fn(this.info);
+          this.races = result.races;
+          fn(this.races);
         },
         this.handleError
       )
@@ -43,6 +33,8 @@ export class AbilitiesService{
   }
 
   private handleError (error: any) {
+    // In a real world app, we might use a remote logging infrastructure
+    // We'd also dig deeper into the error to get a better message
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
