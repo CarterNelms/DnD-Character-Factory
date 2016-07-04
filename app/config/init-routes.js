@@ -29,6 +29,7 @@ function load (app, fn){
   app.get('/partials/:name', partials.index);
   app.get('/partials/characters/:name', partials.characters);
   app.get('/partials/characters/abilities/:name', partials.abilities);
+  app.get('/partials/characters/classes/:name', partials.classes);
   app.get('/partials/characters/races/:name', partials.races);
   app.get('/partials/common/:name', partials.common);
 

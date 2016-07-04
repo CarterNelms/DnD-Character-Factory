@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Http } from "@angular/http";
+import { Service } from '../base/service';
 
-@Injectable()
-export class CharacterCreateService {
+export class CharacterCreateService extends Service {
   public abilities;
 
-  constructor () {
+  constructor (private http: Http) {
     this.abilities = {
       bonuses: {
         race: {},
@@ -13,6 +13,7 @@ export class CharacterCreateService {
         subrace: {}
       }
     }
+    super(this.http);
   }
 
   setAbilityBonuses (bonus_type, ability_score_increase) {

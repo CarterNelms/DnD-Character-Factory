@@ -1,38 +1,50 @@
 [
     {
+        "_id":"barbarian",
         "name":"Barbarian"
     },
     {
+        "_id":"bard",
         "name":"Bard"
     },
     {
+        "_id":"cleric",
         "name":"Cleric"
     },
     {
+        "_id":"druid",
         "name":"Druid"
     },
     {
+        "_id":"fighter",
         "name":"Fighter"
     },
     {
+        "_id":"monk",
         "name":"Monk"
     },
     {
+        "_id":"paladin",
         "name":"Paladin"
     },
     {
+        "_id":"ranger",
         "name":"Ranger"
     },
     {
+        "_id":"rogue",
         "name":"Rogue"
     },
     {
+        "_id":"sorcerer",
         "name":"Sorcerer"
     },
     {
+        "_id":"warlock",
         "name":"Warlock"
     },
     {
+        "_id":"wizard",
         "name":"Wizard"
     }
 ]

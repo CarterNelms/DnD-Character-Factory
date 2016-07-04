@@ -2,12 +2,6 @@
   .panel-heading Race
   .panel-body
     .row
-      //- div(class="col-xs-{{hasSubraces() ? '12' : '24'}}")
-      //-   select.form-control('(change)'="setRace($event.target.value)")
-      //-     option(*ngFor="let r of races; let i = index" '[value]'="i") {{r.name}}
-      //- .col-xs-12(*ngIf="hasSubraces()")
-      //-   select.form-control('(change)'="setSubrace($event.target.value)")
-      //-     option(*ngFor="let sr of race.subraces; let i = index" '[value]'="i") {{sr.name}}
       div(class="col-xs-{{hasSubraces() ? '12' : '24'}}")
         select.form-control('[ngModel]'="race" '(ngModelChange)'="setRace($event)")
           option(*ngFor="let r of races" '[ngValue]'="r") {{r.name}}

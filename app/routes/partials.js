@@ -10,6 +10,11 @@ exports.abilities = (req, res) => {
   res.render('partials/characters/abilities/' + name, {});
 };
 
+exports.classes = (req, res) => {
+  var name = req.params.name;
+  res.render('partials/characters/classes/' + name, {});
+};
+
 exports.characters = (req, res) => {
   var name = req.params.name;
   res.render('partials/characters/' + name, {});

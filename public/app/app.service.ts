@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Service } from './base/service';
 
-@Injectable()
-export class AppService{
-  modals;
+export class AppService extends Service{
+  public modals;
 
   constructor () {
     this.modals = {
@@ -11,5 +10,6 @@ export class AppService{
         body: ''
       }
     }
+    super();
   }
 }

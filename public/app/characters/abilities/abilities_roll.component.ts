@@ -40,9 +40,11 @@ export class AbilitiesRollComponent {
 
         price_increase_scores.unshift(this.rules.min);
 
-        let price_increase_scores_length = price_increase_scores.length;
+        let price_increase_scores_length = price_increase_scores.length,
+        used_points = 0;
+        console.log(this.scores);
 
-        return this.scores.reduce((used_points, score) => {
+        _.each(this.scores, score => {
           let price_increase_scores_index = 0,
           last_price_increase_score = 0;
 
@@ -57,9 +59,7 @@ export class AbilitiesRollComponent {
             last_price_increase_score = price_increase_score;
             price_increase_scores_index++;
           }
-
-          return used_points;
-        }, 0);
+        });
       },
       hasExceededMax: (scores = this.scores) => {
         return this.points.getUsed(scores) > this.points.max;
