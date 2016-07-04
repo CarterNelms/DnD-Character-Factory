@@ -12,23 +12,23 @@ import { CharacterCreateService } from '../create.service';
 })
 
 export class ClassChooseComponent {
-  // public class;
-  // public classes;
+  public class;
+  public classes;
 
-  // constructor(private service: ClassesService, private character_create_service: CharacterCreateService) { }
+  constructor(private service: ClassesService, private character_create_service: CharacterCreateService) { }
 
-  // ngOnInit() {
-  //   this.class = {};
-  //   this.classs = [];
+  ngOnInit() {
+    this.class = {};
+    this.classes = [];
 
-  //   this.service.getRaces(classes => {
-  //     this.classs = classes;
+    this.service.getClasses(classes => {
+      this.classes = classes;
 
-  //     this.setRandomClass();
-  //   });
-  // }
+      this.setRandomClass();
+    });
+  }
 
-  // setRandomClass () {
-  //   this.class = this.classs[Math.floor(this.classs.length * Math.random())];
-  // }
+  setRandomClass () {
+    this.class = this.classes[Math.floor(this.classes.length * Math.random())];
+  }
 }

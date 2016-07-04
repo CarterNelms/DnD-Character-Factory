@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
  
 import { AbilitiesRollComponent } from './abilities/abilities_roll.component';
-// import { ClassChooseComponent } from './classes/class_choose.component';
+import { ClassChooseComponent } from './classes/class_choose.component';
 import { RaceChooseComponent } from './races/race_choose.component';
 
 import { CharacterCreateService } from './create.service';
 
 @Component({
     templateUrl: '/partials/characters/create',
-    directives: [ROUTER_DIRECTIVES, AbilitiesRollComponent, RaceChooseComponent],
+    directives: [ROUTER_DIRECTIVES, AbilitiesRollComponent, ClassChooseComponent, RaceChooseComponent],
     providers: [CharacterCreateService]
 })
 

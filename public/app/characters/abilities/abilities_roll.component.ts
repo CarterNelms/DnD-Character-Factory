@@ -170,9 +170,7 @@ export class AbilitiesRollComponent {
       return prev + current;
     }, 0);
 
-    return {
-      score: score
-    }
+    return score;
   }
 
   areScoresSet () {

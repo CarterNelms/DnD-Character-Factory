@@ -20,11 +20,13 @@ function load (app, fn){
   var home                    = traceur.require(__dirname + '/../routes/home.js');
   var partials                = traceur.require(__dirname + '/../routes/partials.js');
   var races                   = traceur.require(__dirname + '/../routes/races.js');
+  var classes                 = traceur.require(__dirname + '/../routes/classes.js');
 
   app.get('/', dbg, home.index);
   // app.get('/characters/create', dbg, characters.create);
   app.get('/characters/abilities/get-info', dbg, abilities.getInfo);
-  app.get('/characters/races/get', dbg, races.getInfo);
+  app.get('/characters/races/get', dbg, races.get);
+  app.get('/characters/classes/get', dbg, classes.get);
 
   app.get('/partials/:name', partials.index);
   app.get('/partials/characters/:name', partials.characters);

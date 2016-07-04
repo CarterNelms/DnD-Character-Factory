@@ -1,7 +1,7 @@
 import { Http } from "@angular/http";
 import { Service } from '../../base/service';
 
-export class RacesService extends Service {
+export class ClassesService extends Service {
   private classes;
 
   constructor (private http: Http) {

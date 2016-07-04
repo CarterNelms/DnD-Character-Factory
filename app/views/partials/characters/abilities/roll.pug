@@ -45,7 +45,7 @@
                   td.dt-left {{ability.abbreviation}}
                   td
                     .row
-                      .p-o-0(class="col-xs-{{roll_method.is_editable || rules.is_orderable ? 12 : 24}}") {{scores[ability._id]}}
+                      .p-o-0(class="col-xs-{{roll_method.is_editable || rules.is_orderable ? 12 : 24}}") {{scores[ability._id] | ability_score:'-'}}
                       .col-xs-12.p-o-0(*ngIf="roll_method.is_editable")
                         .pull-left
                           button.btn.btn-xs.btn-danger('(mousedown)'="incrementScoreHold(ability._id, -1)" '(mouseup)'="incrementScoreCancel()" '(mouseout)'="incrementScoreCancel()")

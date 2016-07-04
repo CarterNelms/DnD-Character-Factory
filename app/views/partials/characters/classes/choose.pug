@@ -1,7 +1,7 @@
 .panel.panel-primary
-  .panel-heading Race
+  .panel-heading Class
   .panel-body
     .row
       .col-xs-24
         select.form-control('[(ngModel)]'="class")
-          option(*ngFor="let c of races" '[ngValue]'="c") {{c.name}}
+          option(*ngFor="let c of classes" '[ngValue]'="c") {{c.name}}
