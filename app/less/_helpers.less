@@ -1,0 +1,96 @@
+.text-bold {
+  font-weight: bold;
+}
+
+// Table text alignment
+
+@text-alignments: left, right, center;
+@text-alignments-length: length(@text-alignments);
+
+.generate-table-text-align-classes(@m, @n: 1) when (@n =< @m) {
+  @alignment: extract(@text-alignments, @n);
+
+  .table {
+    &.dt-@{alignment} {
+      text-align: @alignment;
+
+      thead, tbody {
+        tr {
+          th, td {
+            text-align: @alignment;
+          }
+        }
+      }
+    }
+
+    thead, tbody {
+      &.dt-@{alignment} {
+        text-align: @alignment;
+
+        tr {
+          th, td {
+            text-align: @alignment;
+          }
+        }
+      }
+
+      tr {
+        &.dt-@{alignment} {
+          text-align: @alignment;
+
+          th, td {
+            text-align: @alignment;
+          }
+        }
+
+        th, td {
+          &.dt-@{alignment} {
+            text-align: @alignment !important;
+          }
+        }
+      }
+    }
+  }
+
+  .generate-table-text-align-classes(@m, (@n + 1));
+}
+
+.generate-table-text-align-classes(@text-alignments-length);
+
+// Utility Classes
+
+@directions: t top, b bottom, l left, r right, x left right, y top bottom, o top right bottom left;
+@directions-length: length(@directions);
+
+.friday (@d, @direction, @size, @d_index) when (@d_index > 1) {
+  @dir: extract(@direction, @d_index);
+
+  .p-@{d}-@{size} {
+    padding-@{dir}: @size*1px !important;
+  }
+
+  .m-@{d}-@{size} {
+    margin-@{dir}: @size*1px !important;
+  }
+
+  .friday(@d, @direction, @size, (@d_index - 1));
+}
+
+.generate-utility-classes-by-direction(@size, @length-index: 1) when (@length-index =< @directions-length) {
+  @direction: extract(@directions, @length-index);
+  @d: extract(@direction, 1);
+  @direction-length: length(@direction);
+
+  .friday (@d, @direction, @size, @direction-length);
+
+  .generate-utility-classes-by-direction(@size, (@length-index + 1));
+}
+
+.generate-utility-classes(@max-size, @size: 0) when (@size =< @max-size) {
+
+  .generate-utility-classes-by-direction(@size);
+
+  .generate-utility-classes(@max-size, (@size + 5));
+}
+
+.generate-utility-classes(30);

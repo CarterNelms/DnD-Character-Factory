@@ -3,5 +3,5 @@
   .panel-body
     .row
       .col-xs-24
-        select.form-control('[(ngModel)]'="class")
+        select.form-control('[ngModel]'="class" '(ngModelChange)'="setClass($event)")
           option(*ngFor="let c of classes" '[ngValue]'="c") {{c.name}}

@@ -4,13 +4,15 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { AbilitiesRollComponent } from './abilities/abilities_roll.component';
 import { ClassChooseComponent } from './classes/class_choose.component';
 import { RaceChooseComponent } from './races/race_choose.component';
+import { SkillsChooseComponent } from './skills/skills_choose.component';
 
-import { CharacterCreateService } from './create.service';
+import { AbilitiesService } from './abilities/abilities.service';
+import { SkillsService } from './skills/skills.service';
 
 @Component({
     templateUrl: '/partials/characters/create',
-    directives: [ROUTER_DIRECTIVES, AbilitiesRollComponent, ClassChooseComponent, RaceChooseComponent],
-    providers: [CharacterCreateService]
+    directives: [ROUTER_DIRECTIVES, AbilitiesRollComponent, ClassChooseComponent, RaceChooseComponent, SkillsChooseComponent],
+    providers: [AbilitiesService, SkillsService]
 })
 
 export class CharacterCreateComponent {

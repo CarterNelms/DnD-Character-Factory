@@ -9510,69 +9510,8 @@ button.close {
   overflow: visible;
   clip: auto;
 }
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-#wrapper {
-  min-height: 100%;
-  position: relative;
-}
-#nav {
-  border-bottom: 4px solid #95470f;
-}
-.dropdown-menu {
-  border-top: 4px solid #95470f;
-  border-color: #d46515;
-}
-#content {
-  padding: 10px;
-  padding-bottom: 45px;
-  /* Height of the footer element */
-}
-#footer {
-  width: 100%;
-  height: 45px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: #95470f;
-}
-.select2-container {
-  width: 100% !important;
-}
-.select2-container.select2-container--disabled .select2-selection {
-  background-color: #fae1cf;
-}
-.select2-container .select2-selection__rendered {
-  color: #e97521 !important;
-}
-.select2-container .select2-selection {
-  height: 34px;
-  padding-top: 3px;
-}
-.select2-container .select2-selection .select2-selection__arrow {
-  top: 4px;
-}
-.select2-container .select2-selection,
-.select2-dropdown {
-  border-color: #fae1cf;
-}
-.select2-container--default .select2-results__option[aria-selected][aria-selected='true'] {
-  background-color: #fae1cf;
-  color: #b35612;
-}
-.select2-container--default .select2-results__option[aria-selected].select2-results__option--highlighted {
-  background-color: #b35612;
-  color: #fef8f4;
-}
-.select2-container .select2-selection .select2-selection__arrow b {
-  border-color: #e97521 transparent transparent transparent;
-}
-.select2-container.select2-container--open .select2-selection .select2-selection__arrow b {
-  border-color: transparent transparent #e97521 transparent;
+.text-bold {
+  font-weight: bold;
 }
 .table.dt-left {
   text-align: left;
@@ -10182,4 +10121,112 @@ body {
 }
 .m-o-30 {
   margin-top: 30px !important;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+#nav {
+  border-bottom: 4px solid #95470f;
+}
+.dropdown-menu {
+  border-top: 4px solid #95470f;
+  border-color: #d46515;
+}
+#content {
+  padding: calc(85px) 0 45px 0;
+}
+#footer {
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #95470f;
+}
+.select2-container {
+  width: 100% !important;
+}
+.select2-container.select2-container--disabled .select2-selection {
+  background-color: #fae1cf;
+}
+.select2-container .select2-selection__rendered {
+  color: #e97521 !important;
+}
+.select2-container .select2-selection {
+  height: 34px;
+  padding-top: 3px;
+}
+.select2-container .select2-selection .select2-selection__arrow {
+  top: 4px;
+}
+.select2-container .select2-selection,
+.select2-dropdown {
+  border-color: #fae1cf;
+}
+.select2-container--default .select2-results__option[aria-selected][aria-selected='true'] {
+  background-color: #fae1cf;
+  color: #b35612;
+}
+.select2-container--default .select2-results__option[aria-selected].select2-results__option--highlighted {
+  background-color: #b35612;
+  color: #fef8f4;
+}
+.select2-container .select2-selection .select2-selection__arrow b {
+  border-color: #e97521 transparent transparent transparent;
+}
+.select2-container.select2-container--open .select2-selection .select2-selection__arrow b {
+  border-color: transparent transparent #e97521 transparent;
+}
+.checkbox {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  margin: 0;
+  float: left;
+}
+.checkbox > .checkbox-img {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.checkbox:not(old) {
+  position: relative;
+}
+.checkbox:not(old) > .checkbox-img {
+  background: url('/bower_components/iCheck/skins/square/orange.png') left top no-repeat;
+}
+.checkbox input[type="checkbox"] {
+  cursor: pointer;
+}
+.checkbox input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+.checkbox input[type="checkbox"]:not(old) {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+.checkbox input[type="checkbox"]:not(old):hover + .checkbox-img {
+  background-position: -24px 0;
+}
+.checkbox input[type="checkbox"]:not(old):checked + .checkbox-img {
+  background-position: calc(-48px) 0;
+}
+.checkbox input[type="checkbox"]:not(old):disabled + .checkbox-img {
+  background-position: calc(-72px) 0;
+}
+.checkbox input[type="checkbox"]:not(old):disabled:checked + .checkbox-img {
+  background-position: calc(-96px) 0;
 }

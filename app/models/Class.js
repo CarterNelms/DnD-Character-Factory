@@ -5,11 +5,9 @@
 var collectionName = 'class';
 
 var mongoose = require('mongoose');
+var traceur = require('traceur');
+var ClassSchema =             traceur.require(__dirname + '/schemas/ClassSchema.js');
 
-var Schema = new mongoose.Schema({
-    name: { type: String, required: true }
-});
+var Class = mongoose.model(collectionName, ClassSchema);
 
-var Model = mongoose.model(collectionName, Schema);
-
-module.exports = Model;
+module.exports = Class;

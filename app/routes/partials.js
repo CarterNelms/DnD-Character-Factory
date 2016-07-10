@@ -29,3 +29,8 @@ exports.races = (req, res) => {
   var name = req.params.name;
   res.render('partials/characters/races/' + name, {});
 };
+
+exports.skills = (req, res) => {
+  var name = req.params.name;
+  res.render('partials/characters/skills/' + name, {});
+};

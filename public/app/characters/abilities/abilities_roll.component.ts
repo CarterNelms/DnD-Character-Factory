@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
+import { CheckboxComponent } from '../../common/checkbox.component';
 import { HelpComponent } from '../../common/help.component';
 
 import { AbilitiesService } from './abilities.service';
-import { CharacterCreateService } from '../create.service';
 
 import { AbilityBonusPipe } from './ability_bonus.pipe';
 import { AbilityModifierPipe } from './ability_modifier.pipe';
 import { AbilityScorePipe } from './ability_score.pipe';
+import { ObjToArrPipe } from '../../common/obj_to_arr.pipe';
  
 @Component({
   selector: 'ability-scores-roll',
   templateUrl: '/partials/characters/abilities/roll',
-  directives: [ROUTER_DIRECTIVES, HelpComponent],
-  providers: [AbilitiesService],
-  pipes: [AbilityBonusPipe, AbilityModifierPipe, AbilityScorePipe]
+  directives: [ROUTER_DIRECTIVES, CheckboxComponent, HelpComponent],
+  providers: [],
+  pipes: [AbilityBonusPipe, AbilityModifierPipe, AbilityScorePipe, ObjToArrPipe]
 })
 
 export class AbilitiesRollComponent {
@@ -29,11 +30,11 @@ export class AbilitiesRollComponent {
 
   private event_timer;
 
-  constructor(private service: AbilitiesService, private character_create_service: CharacterCreateService) { }
+  constructor(private service: AbilitiesService) { }
 
   ngOnInit() {
-    this.abilities = [];
-    this.bonuses = this.character_create_service.abilities.bonuses;
+    this.abilities = {};
+    this.bonuses = this.service.bonuses;
     this.points = {
       getUsed: (scores = this.scores) => {
         let price_increase_scores = _.clone(this.points.price_increase_scores);
@@ -42,7 +43,6 @@ export class AbilitiesRollComponent {
 
         let price_increase_scores_length = price_increase_scores.length,
         used_points = 0;
-        console.log(this.scores);
 
         _.each(this.scores, score => {
           let price_increase_scores_index = 0,
@@ -60,6 +60,8 @@ export class AbilitiesRollComponent {
             price_increase_scores_index++;
           }
         });
+
+        return used_points;
       },
       hasExceededMax: (scores = this.scores) => {
         return this.points.getUsed(scores) > this.points.max;
@@ -74,10 +76,17 @@ export class AbilitiesRollComponent {
       min: this.service.min_base_score,
       max: this.service.max_base_score
     };
-    this.scores = {};
+    this.scores = this.service.scores;
 
     this.service.getInfo(info => {
-      this.abilities = info.abilities;
+      let abilities = {};
+
+      _.each(info.abilities, (ability, index) => {
+        ability.index = index;
+        this.service.abilities[ability._id] = ability;
+      });
+
+      this.abilities = this.service.abilities;
       this.roll_methods = info.ability_roll_methods;
 
       this.setRollMethod(this.roll_methods[0]);
@@ -109,14 +118,14 @@ export class AbilitiesRollComponent {
         break;
     }
 
-    this.setOrderability(this.roll_method.is_orderable);
+    this.rules.is_orderable = this.roll_method.is_orderable;
 
     if (!Array.isArray(scores)) {
       return;
     }
 
-    this.abilities.forEach(ability => {
-      this.scores[ability._id] = scores.length === 0 ? 8 : scores.shift();
+    _.each(this.abilities, (ability, ability_id) => {
+      this.scores[ability_id] = scores.length === 0 ? 8 : scores.shift();
     });
   }
 
@@ -140,13 +149,9 @@ export class AbilitiesRollComponent {
       return;
     }
 
-    this.abilities.forEach(ability => {
-      this.scores[ability._id] = this.rollScore(dice_count);
+    _.each(this.abilities, (ability, ability_id) => {
+      this.scores[ability_id] = this.rollScore(dice_count);
     });
-  }
-
-  setOrderability (is_orderable) {
-    this.rules.is_orderable = is_orderable;
   }
 
   private rollScore (dice_count: number) {
@@ -183,12 +188,12 @@ export class AbilitiesRollComponent {
       total_score += score;
     });
 
-    return !(score_count < this.abilities.length || total_score === 0);
+    return !(score_count < _.size(this.abilities) || total_score === 0);
   }
 
   swapScores (ability_id: string, dest_index: any) {
     if (typeof dest_index === 'number') {
-      let last_index = this.abilities.length - 1;
+      let last_index = _.size(this.abilities) - 1;
 
       if (dest_index < 0) {
         dest_index = last_index;
@@ -196,10 +201,10 @@ export class AbilitiesRollComponent {
         dest_index = 0;
       }
 
-      dest_index = this.abilities[dest_index]._id;
+      dest_index = _.find(this.abilities, { index: dest_index })._id;
     }
 
-    if (ability_id === dest_index || !(_.find(this.abilities, { _id: dest_index }))) {
+    if (ability_id === dest_index || !(this.abilities[dest_index])) {
       return;
     }
 
@@ -259,9 +264,14 @@ export class AbilitiesRollComponent {
   }
 
   getTotalScore (ability_id) {
-    return this.scores[ability_id]
-      + (this.bonuses.race[ability_id] | 0)
-      + (this.bonuses.subrace[ability_id] | 0)
-    ;
+    return this.service.getTotalScore(ability_id);
+  }
+
+  arePointsWasted (ability_id) {
+    return this.service.getRawScore(ability_id) > this.service.max_score;
+  }
+
+  getModifier (ability_id) {
+    return this.service.getModifier(ability_id);
   }
 }

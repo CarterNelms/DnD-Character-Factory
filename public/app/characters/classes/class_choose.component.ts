@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { ClassesService } from './classes.service';
-import { CharacterCreateService } from '../create.service';
+import { SkillsService } from '../skills/skills.service';
  
 @Component({
   selector: 'class-choose',
@@ -15,7 +15,7 @@ export class ClassChooseComponent {
   public class;
   public classes;
 
-  constructor(private service: ClassesService, private character_create_service: CharacterCreateService) { }
+  constructor(private service: ClassesService, private skills_service: SkillsService) { }
 
   ngOnInit() {
     this.class = {};
@@ -28,7 +28,12 @@ export class ClassChooseComponent {
     });
   }
 
+  setClass (clss) {
+    this.class = clss;
+    this.skills_service.setAllowedProficienciesFromTraits('class', this.class.traits);
+  }
+
   setRandomClass () {
-    this.class = this.classes[Math.floor(this.classes.length * Math.random())];
+    this.setClass(this.classes[Math.floor(this.classes.length * Math.random())]);
   }
 }

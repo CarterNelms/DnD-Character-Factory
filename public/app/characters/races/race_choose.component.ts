@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
+import { AbilitiesService } from '../abilities/abilities.service';
 import { RacesService } from './races.service';
-import { CharacterCreateService } from '../create.service';
+import { SkillsService } from '../skills/skills.service';
  
 @Component({
   selector: 'race-choose',
@@ -16,7 +17,7 @@ export class RaceChooseComponent {
   public races;
   public subrace;
 
-  constructor(private service: RacesService, private character_create_service: CharacterCreateService) { }
+  constructor(private service: RacesService, private abilities_service: AbilitiesService, private skills_service: SkillsService) { }
 
   ngOnInit() {
     this.race = {};
@@ -39,13 +40,15 @@ export class RaceChooseComponent {
 
   setRace (race) {
     this.race = race;
-    this.character_create_service.setRaceAbilityBonuses(this.race);
+    this.abilities_service.setBonusesFromTraits('race', this.race.traits);
+    this.skills_service.setAllowedProficienciesFromTraits('race', this.race.traits, false);
     this.setRandomSubrace();
   }
 
   setSubrace (subrace) {
     this.subrace = subrace;
-    this.character_create_service.setSubraceAbilityBonuses(this.subrace);
+    this.abilities_service.setBonusesFromTraits('subrace', this.subrace.traits);
+    this.skills_service.setAllowedProficienciesFromTraits('subrace', this.subrace.traits);
   }
 
   hasSubraces () {

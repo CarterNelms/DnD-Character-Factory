@@ -23,8 +23,7 @@ body {
 }
 
 #content {
-  padding:10px;
-  padding-bottom: @footer-height; /* Height of the footer element */
+  padding: calc(20px + @navbar-height) 0 @footer-height 0;
 }
 
 #footer {
@@ -81,96 +80,59 @@ body {
   border-color: transparent transparent @input-color transparent;
 }
 
-// Table text alignment
+.checkbox {
+  display: inline-block;
+  height: @checkbox-length;
+  width: @checkbox-length;
+  margin: 0;
+  float: left;
 
-@text-alignments: left, right, center;
-@text-alignments-length: length(@text-alignments);
+  > .checkbox-img {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
 
-.generate-table-text-align-classes(@m, @n: 1) when (@n =< @m) {
-  @alignment: extract(@text-alignments, @n);
+  &:not(old) {
+    position: relative;
 
-  .table {
-    &.dt-@{alignment} {
-      text-align: @alignment;
-
-      thead, tbody {
-        tr {
-          th, td {
-            text-align: @alignment;
-          }
-        }
-      }
-    }
-
-    thead, tbody {
-      &.dt-@{alignment} {
-        text-align: @alignment;
-
-        tr {
-          th, td {
-            text-align: @alignment;
-          }
-        }
-      }
-
-      tr {
-        &.dt-@{alignment} {
-          text-align: @alignment;
-
-          th, td {
-            text-align: @alignment;
-          }
-        }
-
-        th, td {
-          &.dt-@{alignment} {
-            text-align: @alignment !important;
-          }
-        }
-      }
+    > .checkbox-img {
+      background:url('/bower_components/iCheck/skins/square/orange.png') left top no-repeat;
     }
   }
 
-  .generate-table-text-align-classes(@m, (@n + 1));
-}
+  input[type="checkbox"] {
+    cursor: pointer;
 
-.generate-table-text-align-classes(@text-alignments-length);
-
-// Utility Classes
-
-@directions: t top, b bottom, l left, r right, x left right, y top bottom, o top right bottom left;
-@directions-length: length(@directions);
-
-.friday (@d, @direction, @size, @d_index) when (@d_index > 1) {
-  @dir: extract(@direction, @d_index);
-
-  .p-@{d}-@{size} {
-    padding-@{dir}: @size*1px !important;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
+  
+  input[type="checkbox"]:not(old) {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 
-  .m-@{d}-@{size} {
-    margin-@{dir}: @size*1px !important;
+    &:hover + .checkbox-img {
+      background-position: -@checkbox-length 0;
+    }
+
+    &:checked + .checkbox-img {
+      background-position: calc(-2 * @checkbox-length) 0;
+    }
+
+    &:disabled + .checkbox-img {
+      background-position: calc(-3 * @checkbox-length) 0;
+    }
+
+    &:disabled:checked + .checkbox-img {
+      background-position: calc(-4 * @checkbox-length) 0;
+    }
   }
-
-  .friday(@d, @direction, @size, (@d_index - 1));
 }
-
-.generate-utility-classes-by-direction(@size, @length-index: 1) when (@length-index =< @directions-length) {
-  @direction: extract(@directions, @length-index);
-  @d: extract(@direction, 1);
-  @direction-length: length(@direction);
-
-  .friday (@d, @direction, @size, @direction-length);
-
-  .generate-utility-classes-by-direction(@size, (@length-index + 1));
-}
-
-.generate-utility-classes(@max-size, @size: 0) when (@size =< @max-size) {
-
-  .generate-utility-classes-by-direction(@size);
-
-  .generate-utility-classes(@max-size, (@size + 5));
-}
-
-.generate-utility-classes(30);
-

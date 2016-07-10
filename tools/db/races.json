@@ -2,52 +2,83 @@
   {
     "_id":"dwarf",
     "name":"Dwarf",
-    "traits": {
-      "ability_score_increase": [
-        {
-          "ability_id":"constitution",
-          "increase":2
-        }
-      ]
-    },
+    "traits": [
+      {
+        "name":"Ability Score Increase",
+        "ability_score_increases": [
+          {
+            "ability_id":"constitution",
+            "increase":2
+          }
+        ]
+      }
+    ],
     "subraces": [
       {
         "_id":"hill_dwarf",
         "name":"Hill Dwarf",
-        "traits":{
-          "ability_score_increase": [
-            {
-              "ability_id":"wisdom",
-              "increase":1
-            }
-          ]
-        }
+        "traits": [
+          {
+            "name":"Ability Score Increase",
+            "ability_score_increases": [
+              {
+                "ability_id":"wisdom",
+                "increase":1
+              }
+            ]
+          }
+        ]
       },
       {
         "_id":"mountain_dwarf",
         "name":"Mountain Dwarf",
-        "traits":{
-          "ability_score_increase": [
-            {
-              "ability_id":"strength",
-              "increase":2
-            }
-          ]
-        }
+        "traits": [
+          {
+            "name":"Ability Score Increase",
+            "ability_score_increases": [
+              {
+                "ability_id":"strength",
+                "increase":2
+              }
+            ]
+          }
+        ]
       }
     ]
   },
   {
-    "_id":"elf",
-    "name":"Elf",
-    "traits": {
-      "ability_score_increase": [
-        {
-          "ability_id":"dexterity",
-          "increase":2
+    "_id":"half_elf",
+    "name":"Half-Elf",
+    "traits": [
+      {
+        "name":"Ability Score Increase",
+        "ability_score_increases": [
+          {
+            "ability_id":"charisma",
+            "increase":2
+          },
+          {
+            "ability_id":"",
+            "increase":1
+          },
+          {
+            "ability_id":"",
+            "increase":1
+          }
+        ]
+      },
+      {
+        "name":"Skill Versatility",
+        "proficiencies": {
+          "skills": [
+            {
+              "proficiency_ids":[],
+              "count":2
+            }
+          ]
         }
-      ]
-    },
+      }
+    ],
     "subraces": []
   }
 ]

@@ -1,50 +1,41 @@
 [
-    {
-        "_id":"barbarian",
-        "name":"Barbarian"
-    },
-    {
-        "_id":"bard",
-        "name":"Bard"
-    },
-    {
-        "_id":"cleric",
-        "name":"Cleric"
-    },
-    {
-        "_id":"druid",
-        "name":"Druid"
-    },
-    {
-        "_id":"fighter",
-        "name":"Fighter"
-    },
-    {
-        "_id":"monk",
-        "name":"Monk"
-    },
-    {
-        "_id":"paladin",
-        "name":"Paladin"
-    },
-    {
-        "_id":"ranger",
-        "name":"Ranger"
-    },
-    {
-        "_id":"rogue",
-        "name":"Rogue"
-    },
-    {
-        "_id":"sorcerer",
-        "name":"Sorcerer"
-    },
-    {
-        "_id":"warlock",
-        "name":"Warlock"
-    },
-    {
-        "_id":"wizard",
-        "name":"Wizard"
-    }
+  {
+    "_id":"rogue",
+    "name":"Rogue",
+    "traits": [
+      {
+        "name":"Proficiencies",
+        "proficiencies": {
+          "skills": [
+            {
+              "proficiency_ids":[
+                "acrobatics","athletics","deception","insight","intimidation","investigation","perception",
+                "performace","persuation","sleight_of_hand","stealth"
+              ],
+              "count":4
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "_id":"wizard",
+    "name":"Wizard",
+    "traits": [
+      {
+        "name":"Proficiencies",
+        "proficiencies": {
+          "skills": [
+            {
+              "proficiency_ids":[
+                "arcana","history","insight","investigation","medicine","religion"
+              ],
+              "count":2
+            }
+          ]
+        }
+      }
+    ]
+  }
 ]
