@@ -10200,16 +10200,16 @@ body {
 .checkbox:not(old) {
   position: relative;
 }
-.checkbox:not(old) > .checkbox-img {
-  background: url('/bower_components/iCheck/skins/square/orange.png') left top no-repeat;
-}
-.checkbox input[type="checkbox"] {
+.checkbox input[type="checkbox"],
+.checkbox input[type="radio"] {
   cursor: pointer;
 }
-.checkbox input[type="checkbox"]:disabled {
+.checkbox input[type="checkbox"]:disabled,
+.checkbox input[type="radio"]:disabled {
   cursor: not-allowed;
 }
-.checkbox input[type="checkbox"]:not(old) {
+.checkbox input[type="checkbox"]:not(old),
+.checkbox input[type="radio"]:not(old) {
   opacity: 0;
   position: absolute;
   right: 0;
@@ -10218,15 +10218,38 @@ body {
   height: 100%;
   width: 100%;
 }
-.checkbox input[type="checkbox"]:not(old):hover + .checkbox-img {
+.checkbox input[type="checkbox"]:not(old) + .checkbox-img,
+.checkbox input[type="radio"]:not(old) + .checkbox-img {
+  background: url('/bower_components/iCheck/skins/square/orange.png') left top no-repeat;
+}
+.checkbox input[type="checkbox"]:not(old):hover + .checkbox-img,
+.checkbox input[type="radio"]:not(old):hover + .checkbox-img {
   background-position: -24px 0;
 }
-.checkbox input[type="checkbox"]:not(old):checked + .checkbox-img {
+.checkbox input[type="checkbox"]:not(old):checked + .checkbox-img,
+.checkbox input[type="radio"]:not(old):checked + .checkbox-img {
   background-position: calc(-48px) 0;
 }
-.checkbox input[type="checkbox"]:not(old):disabled + .checkbox-img {
+.checkbox input[type="checkbox"]:not(old):disabled + .checkbox-img,
+.checkbox input[type="radio"]:not(old):disabled + .checkbox-img {
   background-position: calc(-72px) 0;
 }
-.checkbox input[type="checkbox"]:not(old):disabled:checked + .checkbox-img {
+.checkbox input[type="checkbox"]:not(old):disabled:checked + .checkbox-img,
+.checkbox input[type="radio"]:not(old):disabled:checked + .checkbox-img {
   background-position: calc(-96px) 0;
+}
+.checkbox input[type="radio"]:not(old) + .checkbox-img {
+  background-position: calc(-120px) 0;
+}
+.checkbox input[type="radio"]:not(old):hover + .checkbox-img {
+  background-position: calc(-144px) 0;
+}
+.checkbox input[type="radio"]:not(old):checked + .checkbox-img {
+  background-position: calc(-168px) 0;
+}
+.checkbox input[type="radio"]:not(old):disabled + .checkbox-img {
+  background-position: calc(-192px) 0;
+}
+.checkbox input[type="radio"]:not(old):disabled:checked + .checkbox-img {
+  background-position: calc(-216px) 0;
 }

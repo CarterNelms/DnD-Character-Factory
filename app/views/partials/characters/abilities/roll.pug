@@ -9,11 +9,11 @@
             help.m-t-10.pull-right('[header]'="roll_method.name" '[body]'="roll_method.description" '[text]'="'Explain ' + roll_method.name")
         .row
           .col-xs-24
-            select.form-control('[ngModel]'="roll_method" '(ngModelChange)'="setRollMethod($event)")
-              option(*ngFor="let method of roll_methods" '[ngValue]'="method") {{method.name}}
+            select.form-control('[(ngModel)]'="roll_method")
+              option(*ngFor="let method of (roll_methods | obj_to_arr)" '[ngValue]'="method") {{method.name}}
         .row.m-t-20(*ngIf="roll_method._id === 'point_buy'")
           .col-xs-24
-            p Points: {{points.getUsed()}} / {{points.max}}
+            p Points: {{points.used}} / {{points.max}}
         .row.m-t-20(*ngIf="roll_method.is_orderability_optional")
           .col-xs-24
             checkbox("[id]"="'ability-score-orderable'" '[checked]'="!rules.is_orderable" '(change)'="rules.is_orderable = !$event.target.checked")

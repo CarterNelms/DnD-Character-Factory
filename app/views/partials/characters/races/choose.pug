@@ -3,8 +3,8 @@
   .panel-body
     .row
       div(class="col-xs-{{hasSubraces() ? '12' : '24'}}")
-        select.form-control('[ngModel]'="race" '(ngModelChange)'="setRace($event)")
-          option(*ngFor="let r of races" '[ngValue]'="r") {{r.name}}
+        select.form-control('[(ngModel)]'="race")
+          option(*ngFor="let r of (races | obj_to_arr)" '[ngValue]'="r") {{r.name}}
       .col-xs-12(*ngIf="hasSubraces()")
-        select.form-control('[ngModel]'="subrace" '(ngModelChange)'="setSubrace($event)")
-          option(*ngFor="let sr of race.subraces" '[ngValue]'="sr") {{sr.name}}
+        select.form-control('[(ngModel)]'="subrace")
+          option(*ngFor="let sr of (subraces | obj_to_arr)" '[ngValue]'="sr") {{sr.name}}

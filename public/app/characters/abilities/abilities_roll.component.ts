@@ -23,7 +23,7 @@ export class AbilitiesRollComponent {
   public abilities;
   public bonuses;
   public points;
-  public roll_method;
+  public roll_method_id;
   public roll_methods;
   public rules;
   public scores: number[];
@@ -36,7 +36,7 @@ export class AbilitiesRollComponent {
     this.abilities = {};
     this.bonuses = this.service.bonuses;
     this.points = {
-      getUsed: (scores = this.scores) => {
+      private getUsed: () => {
         let price_increase_scores = _.clone(this.points.price_increase_scores);
 
         price_increase_scores.unshift(this.rules.min);
@@ -63,13 +63,16 @@ export class AbilitiesRollComponent {
 
         return used_points;
       },
-      hasExceededMax: (scores = this.scores) => {
-        return this.points.getUsed(scores) > this.points.max;
+      get used () {
+        return this.getUsed();
+      },
+      get hasExceededMax () {
+        return this.used > this.max;
       },
       price_increase_scores: [13,15],
       max: 27
     };
-    this.roll_method = {};
+    this.roll_method_id = null;
     this.roll_methods = [];
     this.rules = {
       is_orderable: false,
@@ -87,21 +90,26 @@ export class AbilitiesRollComponent {
       });
 
       this.abilities = this.service.abilities;
-      this.roll_methods = info.ability_roll_methods;
+      let roll_methods = {};
+      info.ability_roll_methods.forEach(method => {
+        roll_methods[method._id] = method;
+      });
 
-      this.setRollMethod(this.roll_methods[0]);
+      this.roll_methods = roll_methods;
+
+      this.roll_method = this.roll_methods["standard_array"];
     });
   }
 
-  setRollMethod (method) {
-    this.roll_method = method;
+  set roll_method (method) {
+    this.roll_method_id = method ? method._id : null;
 
     this.rules.min = this.service.min_base_score;
     this.rules.max = this.service.max_base_score;
 
     let scores = null;
 
-    switch (this.roll_method._id) {
+    switch (this.roll_method_id) {
       case "point_buy":
         scores = [8,8,8,8,8,8];
         this.rules.min = 8;
@@ -127,6 +135,14 @@ export class AbilitiesRollComponent {
     _.each(this.abilities, (ability, ability_id) => {
       this.scores[ability_id] = scores.length === 0 ? 8 : scores.shift();
     });
+  }
+
+  get roll_method () {
+    if (!this.roll_method_id) {
+      return {};
+    }
+
+    return this.roll_methods[this.roll_method_id];
   }
 
   roll (dice_count: number) {
@@ -220,13 +236,13 @@ export class AbilitiesRollComponent {
 
     this.scores[i] = _.clamp(old_score + n, this.rules.min, this.rules.max);
 
-    if (this.roll_method._id !== "point_buy" || n <= 0) {
+    if (this.roll_method_id !== "point_buy" || n <= 0) {
       return;
     }
 
     n = Math.max(n, this.scores[i] - old_score);
 
-    while (n > 0 && this.points.hasExceededMax()) {
+    while (n > 0 && this.points.hasExceededMax) {
       this.scores[i] = _.clamp(old_score + --n, this.rules.min, this.rules.max);
     }
 

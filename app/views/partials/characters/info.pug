@@ -1,0 +1,32 @@
+.panel.panel-primary
+  .panel-heading Basic Info
+  .panel-body
+    .row
+      .col-xs-12
+        .row
+          .col-xs-24
+            label(for="character-name") Character Name
+            input#character-name.form-control(type="text" value="")
+        .row
+          .col-xs-24
+            label(for="player-name") Player Name
+            input#player-name.form-control(type="text" value="")
+        .row
+          .col-xs-19
+            label(for="experience-points") Experience Points
+            input#experience-points.form-control(type="number" "[(ngModel)]"="experience_points" min="0" step="1")
+          .col-xs-5
+            label(for="character-level") Level
+            select#character-level.form-control('[(ngModel)]'="level")
+              option(*ngFor="let lvl of levels" '[ngValue]'="lvl") {{lvl.level}}
+      .col-xs-12
+        .row
+          .col-xs-24
+            label Alignment
+        .row
+          .col-xs-6
+          .col-xs-6(*ngFor="let order of alignments.order") {{order}}
+        .row(*ngFor="let morality of alignments.morality")
+          .col-xs-6 {{morality}}
+          .col-xs-6(*ngFor="let order of alignments.order")
+            checkbox(type="radio" name="alignment" "[checked]"="isChosenAlignment(order, morality)" "(change)"="$event.target.value ? setAlignment(order, morality) : ''")

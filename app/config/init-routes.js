@@ -18,6 +18,7 @@ function load (app, fn){
   // var characters              = traceur.require(__dirname + '/../routes/characters.js');
   // var error                   = traceur.require(__dirname + '/../routes/error.js');
   var classes                 = traceur.require(__dirname + '/../routes/classes.js');
+  var levels                  = traceur.require(__dirname + '/../routes/levels.js');
   var home                    = traceur.require(__dirname + '/../routes/home.js');
   var partials                = traceur.require(__dirname + '/../routes/partials.js');
   var races                   = traceur.require(__dirname + '/../routes/races.js');
@@ -27,6 +28,7 @@ function load (app, fn){
   // app.get('/characters/create', dbg, characters.create);
   app.get('/characters/abilities/get-info', dbg, abilities.getInfo);
   app.get('/characters/classes/get', dbg, classes.get);
+  app.get('/characters/levels/get', dbg, levels.get);
   app.get('/characters/races/get', dbg, races.get);
   app.get('/characters/skills/get', dbg, skills.get);
 

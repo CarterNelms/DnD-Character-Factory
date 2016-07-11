@@ -4,36 +4,53 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { ClassesService } from './classes.service';
 import { SkillsService } from '../skills/skills.service';
  
+import { ObjToArrPipe } from '../../common/obj_to_arr.pipe';
+
 @Component({
   selector: 'class-choose',
   templateUrl: '/partials/characters/classes/choose',
   directives: [ROUTER_DIRECTIVES],
-  providers: [ClassesService]
+  providers: [ClassesService],
+  pipes: [ObjToArrPipe]
 })
 
 export class ClassChooseComponent {
-  public class;
-  public classes;
+  public class_id;
 
   constructor(private service: ClassesService, private skills_service: SkillsService) { }
 
   ngOnInit() {
-    this.class = {};
+    this.class_id = null;
     this.classes = [];
 
     this.service.getClasses(classes => {
-      this.classes = classes;
+      let classes_obj = {};
+      classes.forEach(clss => {
+        classes_obj[clss._id] = clss;
+      });
+
+      this.classes = classes_obj;
 
       this.setRandomClass();
     });
   }
 
-  setClass (clss) {
-    this.class = clss;
-    this.skills_service.setAllowedProficienciesFromTraits('class', this.class.traits);
+  setRandomClass () {
+    this.class = _.sample(this.classes);
   }
 
-  setRandomClass () {
-    this.setClass(this.classes[Math.floor(this.classes.length * Math.random())]);
+  set class (clss) {
+    this.class_id = _.isEmpty(clss) ? null : clss._id;
+    clss = this.class;
+    let traits = clss.traits ? clss.traits : [];
+    this.skills_service.setAllowedProficienciesFromTraits('class', traits);
+  }
+
+  get class () {
+    if (!this.class_id) {
+      return {};
+    }
+
+    return this.classes[this.class_id];
   }
 }

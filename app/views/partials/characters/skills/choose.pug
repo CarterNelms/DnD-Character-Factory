@@ -1,21 +1,12 @@
 .panel.panel-primary
   .panel-heading Skills
   .panel-body
-    //- .row(*ngFor="let s of (skills | obj_to_arr)")
-    //-   .col-xs-6.p-r-5
-    //-     checkbox("[id]"="'is_proficient_in_' + s._id" "[checked]"="isProficient(s._id)" "(changed)"="setProficiency(s._id, $event.target.checked)" "[disabled]"="!isProficiencyOptional(s._id)" "[class]"="isProficiencyCheckboxVisible(s._id) ? '' : 'hidden'")
-    //-     span.pull-right {{getModifier([s._id]) | ability_modifier:false}}
-    //-   .col-xs-18.p-l-0
-    //-     span.pull-right
-    //-       label("[attr.for]"="'is_proficient_in_' + s._id") {{s.name}}
-    //-       |  ({{abilities[s.ability_id]?.abbreviation}})
     table.table.table-hover.nowrap
       tbody
         tr(*ngFor="let s of (skills | obj_to_arr)")
           td
             span.pull-right {{getModifier([s._id]) | ability_modifier:false}}
           td.dt-right
-            //- label("[attr.for]"="'is_proficient_in_' + s._id") {{s.name}}
             label("[attr.for]"="'is_proficient_in_' + s._id") {{s.name}}
             |  ({{abilities[s.ability_id]?.abbreviation}})
           td
