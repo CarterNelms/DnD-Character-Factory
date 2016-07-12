@@ -30,3 +30,5 @@
           .col-xs-6 {{morality}}
           .col-xs-6(*ngFor="let order of alignments.order")
             checkbox(type="radio" name="alignment" "[checked]"="isChosenAlignment(order, morality)" "(change)"="$event.target.value ? setAlignment(order, morality) : ''")
+        .row.m-t-25
+          .col-xs-24 {{alignment.chosen}}

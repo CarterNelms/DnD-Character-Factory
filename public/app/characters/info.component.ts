@@ -15,59 +15,51 @@ import { CharacterInfoService } from './info.service';
 export class CharacterInfoComponent {
   public alignments;
   public alignment;
-  public experience_points: number;
-  public levels;
 
   constructor(private service: CharacterInfoService) { }
 
   ngOnInit() {
-    this.alignment = {};
+    this.alignment = {
+      get chosen () {
+        let alignment = `${this.order} ${this.morality}`;
+        if (alignment === "Neutral Neutral") { alignment = "True Neutral"; }
+        return alignment;
+      }
+    };
     this.alignments = {
       order: ['Lawful','Neutral','Chaotic'],
       morality: ['Good','Neutral','Evil']
     };
-    this.setRandomAlignment();
 
     this.service.getLevels(levels => {
-      this.levels = levels;
       this.experience_points = this.levels[Math.floor(Math.random() * this.levels.length)].experience_points;
     });
+    
+    this.setRandomAlignment();
+  }
+
+  get experience_points () {
+    return this.service.experience_points;
+  }
+
+  set experience_points (experience_points) {
+    this.service.experience_points = experience_points;
   }
 
   get level () {
-    if (!this.levels) {
-      return
-    }
-
-    if (this.levels.length === 0) {
-      return;
-    }
-
-    let exp = _.clamp(this.experience_points * 1, 0, this.levels[this.levels.length - 1].experience_points);
-
-    if (exp != this.experience_points) {
-      return this.levels[0];
-    }
-
-    let i = this.levels.length,
-    level;
-    do {
-      level = this.levels[--i];
-    } while (level.experience_points > exp);
-
-    return level;
+    return this.service.level;
   }
 
   set level (level) {
-    this.experience_points = level.experience_points;
+    this.service.level = level;
+  }
+
+  get levels () {
+    return this.service.levels;
   }
 
   get proficiency_bonus () {
-    if (!this.level) {
-      return 2;
-    }
-
-    return Math.ceil(this.level.level / 4) + 1;
+    return this.service.proficiency_bonus;
   }
 
   setAlignment (order, morality) {

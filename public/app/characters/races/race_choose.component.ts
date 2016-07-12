@@ -17,29 +17,15 @@ import { ObjToArrPipe } from '../../common/obj_to_arr.pipe';
 
 export class RaceChooseComponent {
   public race_id;
-  public races;
   public subrace_id;
 
   constructor(private service: RacesService, private abilities_service: AbilitiesService, private skills_service: SkillsService) { }
 
   ngOnInit() {
     this.race_id = null;
-    this.races = {};
     this.subrace_id = null;
 
     this.service.getRaces(races => {
-      let races_obj = {};
-      races.forEach(race => {
-        let subraces = {};
-        race.subraces.forEach(subrace => {
-          subraces[subrace._id] = subrace;
-        });
-        race.subraces = subraces;
-        races_obj[race._id] = race;
-      });
-
-      this.races = races_obj;
-
       this.setRandomRace();
     });
   }
@@ -63,6 +49,10 @@ export class RaceChooseComponent {
     }
 
     return this.races[this.race_id];
+  }
+
+  get races () {
+    return this.service.races;
   }
 
   setRandomSubrace () {

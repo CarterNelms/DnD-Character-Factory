@@ -5,17 +5,28 @@ export class RacesService extends Service {
   private races;
 
   constructor (private http: Http) {
+    this.races = {};
     super(this.http);
   }
 
   getRaces (fn) {
-    if (this.races != null) {
+    if (!_.isEmpty(this.races)) {
       fn(this.races);
       return;
     }
 
     super.http_get('/characters/races/get', result => {
-      this.races = result.races;
+      let races = {};
+      result.races.forEach(race => {
+        let subraces = {};
+        race.subraces.forEach(subrace => {
+          subraces[subrace._id] = subrace;
+        });
+        race.subraces = subraces;
+        races[race._id] = race;
+      });
+
+      this.races = races;
       fn(this.races);
     });
   }

@@ -21,16 +21,8 @@ export class ClassChooseComponent {
 
   ngOnInit() {
     this.class_id = null;
-    this.classes = [];
 
     this.service.getClasses(classes => {
-      let classes_obj = {};
-      classes.forEach(clss => {
-        classes_obj[clss._id] = clss;
-      });
-
-      this.classes = classes_obj;
-
       this.setRandomClass();
     });
   }
@@ -52,5 +44,9 @@ export class ClassChooseComponent {
     }
 
     return this.classes[this.class_id];
+  }
+
+  get classes () {
+    return this.service.classes;
   }
 }

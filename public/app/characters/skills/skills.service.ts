@@ -15,6 +15,7 @@ export class SkillsService extends Service {
       },
       is_proficient: {}
     };
+    this.skills = {};
     super(this.http);
   }
 
@@ -30,13 +31,22 @@ export class SkillsService extends Service {
   }
 
   getSkills (fn) {
-    if (this.skills != null) {
+    if (!_.isEmpty(this.skills)) {
       fn(this.skills);
       return;
     }
 
     super.http_get('/characters/skills/get', result => {
-      this.skills = result.skills;
+      let skills = {},
+      is_proficient = {};
+
+      result.skills.forEach(skill => {
+        skills[skill._id] = skill;
+        is_proficient[skill._id] = false;
+      });
+
+      this.skills = skills;
+      this.proficiencies.is_proficient = is_proficient;
       fn(this.skills);
     });
   }

@@ -20,11 +20,8 @@ import { ObjToArrPipe } from '../../common/obj_to_arr.pipe';
 })
 
 export class AbilitiesRollComponent {
-  public abilities;
-  public bonuses;
   public points;
   public roll_method_id;
-  public roll_methods;
   public rules;
   public scores: number[];
 
@@ -33,8 +30,6 @@ export class AbilitiesRollComponent {
   constructor(private service: AbilitiesService) { }
 
   ngOnInit() {
-    this.abilities = {};
-    this.bonuses = this.service.bonuses;
     this.points = {
       private getUsed: () => {
         let price_increase_scores = _.clone(this.points.price_increase_scores);
@@ -73,7 +68,6 @@ export class AbilitiesRollComponent {
       max: 27
     };
     this.roll_method_id = null;
-    this.roll_methods = [];
     this.rules = {
       is_orderable: false,
       min: this.service.min_base_score,
@@ -82,23 +76,24 @@ export class AbilitiesRollComponent {
     this.scores = this.service.scores;
 
     this.service.getInfo(info => {
-      let abilities = {};
-
-      _.each(info.abilities, (ability, index) => {
-        ability.index = index;
-        this.service.abilities[ability._id] = ability;
-      });
-
-      this.abilities = this.service.abilities;
-      let roll_methods = {};
-      info.ability_roll_methods.forEach(method => {
-        roll_methods[method._id] = method;
-      });
-
-      this.roll_methods = roll_methods;
-
       this.roll_method = this.roll_methods["standard_array"];
     });
+  }
+
+  get abilities () {
+    return this.service.abilities;
+  }
+
+  get bonuses () {
+    return this.service.bonuses;
+  }
+
+  get roll_method () {
+    if (!this.roll_method_id) {
+      return {};
+    }
+
+    return this.roll_methods[this.roll_method_id];
   }
 
   set roll_method (method) {
@@ -137,30 +132,11 @@ export class AbilitiesRollComponent {
     });
   }
 
-  get roll_method () {
-    if (!this.roll_method_id) {
-      return {};
-    }
-
-    return this.roll_methods[this.roll_method_id];
+  get roll_methods () {
+    return this.service.roll_methods;
   }
 
   roll (dice_count: number) {
-    // let dice_count = 0;
-
-    // switch (this.roll_method._id) {
-    //   case "3d6":
-    //     dice_count = 3;
-    //     break;
-    //   case "4d6":
-    //     dice_count = 4;
-    //     break;
-    //   case "5d6":
-    //     dice_count = 5;
-    //     break;
-    //   default:;
-    // }
-
     if (dice_count < 3) {
       return;
     }

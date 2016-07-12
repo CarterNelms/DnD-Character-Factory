@@ -4,6 +4,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { CheckboxComponent } from '../../common/checkbox.component';
 
 import { AbilitiesService } from '../abilities/abilities.service';
+import { CharacterInfoService } from '../info.service';
 import { SkillsService } from './skills.service';
  
 import { AbilityModifierPipe } from '../abilities/ability_modifier.pipe';
@@ -18,32 +19,33 @@ import { ObjToArrPipe } from '../../common/obj_to_arr.pipe';
 })
 
 export class SkillsChooseComponent {
-  public abilities;
-  public proficiencies;
-  public scores;
-  public skills;
 
-  constructor(private service: SkillsService, private abilities_service: AbilitiesService) { }
+  constructor(private service: SkillsService, private abilities_service: AbilitiesService, private info_service: CharacterInfoService) { }
 
   ngOnInit() {
-    this.abilities = this.abilities_service.abilities;
-    this.proficiencies = this.service.proficiencies;
-    this.scores = this.abilities_service.scores;
-    this.skills = {};
-
     this.service.getSkills(skills => {
-      let s = {},
-      is_p = {};
-
-      skills.forEach(skill => {
-        s[skill._id] = skill;
-        is_p[skill._id] = false;
-      });
-
-      this.skills = s;
-      this.proficiencies.is_proficient = is_p;
       this.service.determineAllAllowedProficiencies();
     });
+  }
+
+  get abilities () {
+    return this.abilities_service.abilities;
+  }
+
+  get scores () {
+    return this.abilities_service.scores;
+  }
+
+  get skills () {
+    return this.service.skills;
+  }
+
+  get proficiencies () {
+    return this.service.proficiencies;
+  }
+
+  get proficiency_bonus () {
+    return this.info_service.proficiency_bonus;
   }
 
   getModifier (skill_id) {
@@ -53,7 +55,7 @@ export class SkillsChooseComponent {
       return null;
     }
 
-    return ability_modifier + (this.isProficient(skill_id) ? 2 : 0);
+    return ability_modifier + (this.isProficient(skill_id) ? this.proficiency_bonus : 0);
   }
 
   setProficiency (skill_id, is_proficient = false) {

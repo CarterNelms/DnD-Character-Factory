@@ -5,17 +5,23 @@ export class ClassesService extends Service {
   private classes;
 
   constructor (private http: Http) {
+    this.classes = {};
     super(this.http);
   }
 
   getClasses (fn) {
-    if (this.classes != null) {
+    if (!_.isEmpty(this.classes)) {
       fn(this.classes);
       return;
     }
 
     super.http_get('/characters/classes/get', result => {
-      this.classes = result.classes;
+      let classes = {};
+      result.classes.forEach(clss => {
+        classes[clss._id] = clss;
+      });
+
+      this.classes = classes;
       fn(this.classes);
     });
   }

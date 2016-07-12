@@ -4,12 +4,12 @@ import { Service } from '../../base/service';
 export class AbilitiesService extends Service {
   public abilities;
   public bonuses;
-  public info;
   public min_base_score: number;
   public max_base_score: number;
   public min_score: number;
   public max_score: number;
-  public scores;
+  public roll_methods;
+  public scores: number[];
 
   constructor (private http: Http) {
     this.abilities = {};
@@ -21,6 +21,7 @@ export class AbilitiesService extends Service {
     this.max_base_score = 20;
     this.min_score = this.min_base_score;
     this.max_score = 20;
+    this.roll_methods = {};
     this.scores = {};
 
     super(this.http);
@@ -33,14 +34,26 @@ export class AbilitiesService extends Service {
   }
 
   getInfo (fn) {
-    if (this.info != null) {
-      fn(this.info);
+    if (!_.isEmpty(this.abilities) && !_.isEmpty(this.roll_methods)) {
+      fn(this.abilities, this.roll_methods);
       return;
     }
 
     super.http_get('/characters/abilities/get-info', result => {
-      this.info = result;
-      fn(this.info);
+      let abilities = {};
+      _.each(result.abilities, (ability, index) => {
+        ability.index = index;
+        abilities[ability._id] = ability;
+      });
+      this.abilities = abilities;
+
+      let roll_methods = {};
+      result.ability_roll_methods.forEach(method => {
+        roll_methods[method._id] = method;
+      });
+      this.roll_methods = roll_methods;
+
+      fn(this.abilities, this.roll_methods);
     });
   }
 
@@ -100,14 +113,16 @@ export class AbilitiesService extends Service {
   }
 
   getTotalScore (ability_id) {
-    return _.clamp(this.getRawScore(ability_id), this.min_score, this.max_score);
+    let raw_score = this.getRawScore(ability_id);
+    return raw_score === 0 ? 0 : _.clamp(raw_score, this.min_score, this.max_score);
   }
 
   private getRawScore (ability_id) {
-    return this.scores[ability_id]
+    let base_score = this.scores[ability_id];
+    return base_score === 0 ? 0 : (this.scores[ability_id]
       + (this.bonuses.race[ability_id] | 0)
       + (this.bonuses.subrace[ability_id] | 0)
-    ;
+    );
   }
 
   getModifier (ability_id) {

@@ -6,7 +6,7 @@
         tr(*ngFor="let s of (skills | obj_to_arr)")
           td
             span.pull-right {{getModifier([s._id]) | ability_modifier:false}}
-          td.dt-right
+          td.dt-right.p-x-0
             label("[attr.for]"="'is_proficient_in_' + s._id") {{s.name}}
             |  ({{abilities[s.ability_id]?.abbreviation}})
           td
