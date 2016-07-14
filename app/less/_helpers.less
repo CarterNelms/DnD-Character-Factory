@@ -1,5 +1,17 @@
 .text-bold {
-  font-weight: bold;
+  font-weight: bold !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.fill-x {
+  width: 100% !important;
+}
+
+.fill-y {
+  height: 100% !important;
 }
 
 // Table text alignment
@@ -86,11 +98,11 @@
   .generate-utility-classes-by-direction(@size, (@length-index + 1));
 }
 
-.generate-utility-classes(@max-size, @size: 0) when (@size =< @max-size) {
+.generate-utility-classes(@max-size, @step: 5, @size: 0) when (@size =< @max-size) {
 
   .generate-utility-classes-by-direction(@size);
 
-  .generate-utility-classes(@max-size, (@size + 5));
+  .generate-utility-classes(@max-size, @step, (@size + @step));
 }
 
-.generate-utility-classes(30);
+.generate-utility-classes(30, 1);

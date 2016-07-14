@@ -31,4 +31,18 @@ export class Service{
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
+
+  private arrayToObjectByObjectID (arr, retain_index: boolean = false) {
+    let obj = {};
+    _.each(arr, (elem, index) => {
+      if (elem._id == null) {
+        return;
+      }
+      if (retain_index) {
+        elem.index = index;
+      }
+      obj[elem._id] = elem;
+    });
+    return obj;
+  }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
+import { DropdownComponent } from '../../common/dropdown.component';
+
 import { AbilitiesService } from '../abilities/abilities.service';
 import { RacesService } from './races.service';
 import { SkillsService } from '../skills/skills.service';
@@ -10,7 +12,7 @@ import { ObjToArrPipe } from '../../common/obj_to_arr.pipe';
 @Component({
   selector: 'race-choose',
   templateUrl: '/partials/characters/races/choose',
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, DropdownComponent],
   providers: [RacesService],
   pipes: [ObjToArrPipe]
 })

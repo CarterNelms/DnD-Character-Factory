@@ -16,12 +16,7 @@ export class ClassesService extends Service {
     }
 
     super.http_get('/characters/classes/get', result => {
-      let classes = {};
-      result.classes.forEach(clss => {
-        classes[clss._id] = clss;
-      });
-
-      this.classes = classes;
+      this.classes = this.arrayToObjectByObjectID(result.classes);
       fn(this.classes);
     });
   }

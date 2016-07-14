@@ -8,12 +8,13 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 })
 
 export class CheckboxComponent {
+  @Input() checked: boolean;
+  @Input() disabled: boolean;
   @Input() id: string;
   @Input() name: string;
   @Input() type: string;
-  @Input() checked: boolean;
+  
   @Output() changed = new EventEmitter();
-  @Input() disabled: boolean;
 
   constructor() {
     if (!this.type) {

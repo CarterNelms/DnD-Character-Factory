@@ -2,7 +2,7 @@
     {
         "_id":"custom",
         "name":"Custom Entry",
-        "description":"Manual Entry. Determine your scores yourself and enter them here. Values must be between 3 and 18. If you are entering numbers that you have rolled yourself, do NOT apply any bonuses to them from your race, your feats, or any other source. Bonus will be added later.",
+        "description":"Manual Entry. Determine your scores yourself and enter them here. Values must be between 1 and 20. If you are entering numbers that you have rolled yourself, do NOT apply any bonuses to them from your race, your feats, or any other source. Bonus will be added later.",
         "order":100,
         "is_official":false,
         "is_rollable":false,

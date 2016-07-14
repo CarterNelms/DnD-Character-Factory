@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
+import { DropdownComponent } from '../../common/dropdown.component';
+
 import { ClassesService } from './classes.service';
 import { SkillsService } from '../skills/skills.service';
  
@@ -9,7 +11,7 @@ import { ObjToArrPipe } from '../../common/obj_to_arr.pipe';
 @Component({
   selector: 'class-choose',
   templateUrl: '/partials/characters/classes/choose',
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, DropdownComponent],
   providers: [ClassesService],
   pipes: [ObjToArrPipe]
 })

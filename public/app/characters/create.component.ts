@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
  
 import { AbilitiesRollComponent } from './abilities/abilities_roll.component';
+import { BackgroundChooseComponent } from './backgrounds/background_choose.component';
 import { CharacterInfoComponent } from './info.component';
 import { ClassChooseComponent } from './classes/class_choose.component';
 import { RaceChooseComponent } from './races/race_choose.component';
@@ -13,7 +14,7 @@ import { SkillsService } from './skills/skills.service';
 
 @Component({
     templateUrl: '/partials/characters/create',
-    directives: [ROUTER_DIRECTIVES, AbilitiesRollComponent, CharacterInfoComponent, ClassChooseComponent, RaceChooseComponent, SkillsChooseComponent],
+    directives: [ROUTER_DIRECTIVES, AbilitiesRollComponent, CharacterInfoComponent, BackgroundChooseComponent, ClassChooseComponent, RaceChooseComponent, SkillsChooseComponent],
     providers: [AbilitiesService, CharacterInfoService, SkillsService]
 })
 

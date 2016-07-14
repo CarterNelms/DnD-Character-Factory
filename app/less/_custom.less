@@ -15,11 +15,11 @@ body {
 
 #nav {
   border-bottom: @navbar-border-bottom;
-}
 
-.dropdown-menu {
-  border-top: @navbar-border-bottom;
-  border-color: @navbar-default-link-active-bg;
+  .dropdown-menu {
+    border-top: @navbar-border-bottom;
+    border-color: @navbar-default-link-active-bg;
+  }
 }
 
 #content {
@@ -80,82 +80,90 @@ body {
   border-color: transparent transparent @input-color transparent;
 }
 
-.checkbox {
-  display: inline-block;
-  height: @checkbox-length;
-  width: @checkbox-length;
-  margin: 0;
-  float: left;
-
-  > .checkbox-img {
+checkbox {
+  .checkbox {
     display: inline-block;
-    height: 100%;
-    width: 100%;
+    height: @checkbox-length;
+    width: @checkbox-length;
     margin: 0;
-  }
+    float: left;
 
-  &:not(old) {
-    position: relative;
-  }
-
-  input[type="checkbox"], input[type="radio"] {
-    cursor: pointer;
-
-    &:disabled {
-      cursor: not-allowed;
+    > .checkbox-img {
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      margin: 0;
     }
 
     &:not(old) {
-      opacity: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-      margin: 0;
-      height: 100%;
-      width: 100%;
+      position: relative;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+      cursor: pointer;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+
+      &:not(old) {
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+
+        & + .checkbox-img {
+          background:url('/bower_components/iCheck/skins/square/orange.png') left top no-repeat;
+        }
+
+        &:hover + .checkbox-img {
+          background-position: -@checkbox-length 0;
+        }
+
+        &:checked + .checkbox-img {
+          background-position: calc(-2 * @checkbox-length) 0;
+        }
+
+        &:disabled + .checkbox-img {
+          background-position: calc(-3 * @checkbox-length) 0;
+        }
+
+        &:disabled:checked + .checkbox-img {
+          background-position: calc(-4 * @checkbox-length) 0;
+        }
+      }
+    }
+
+    input[type="radio"]:not(old) {
 
       & + .checkbox-img {
-        background:url('/bower_components/iCheck/skins/square/orange.png') left top no-repeat;
+        background-position: calc(-5 * @checkbox-length) 0;
       }
 
       &:hover + .checkbox-img {
-        background-position: -@checkbox-length 0;
+        background-position: calc(-6 * @checkbox-length) 0;
       }
 
       &:checked + .checkbox-img {
-        background-position: calc(-2 * @checkbox-length) 0;
+        background-position: calc(-7 * @checkbox-length) 0;
       }
 
       &:disabled + .checkbox-img {
-        background-position: calc(-3 * @checkbox-length) 0;
+        background-position: calc(-8 * @checkbox-length) 0;
       }
 
       &:disabled:checked + .checkbox-img {
-        background-position: calc(-4 * @checkbox-length) 0;
+        background-position: calc(-9 * @checkbox-length) 0;
       }
     }
   }
+}
 
-  input[type="radio"]:not(old) {
-
-    & + .checkbox-img {
-      background-position: calc(-5 * @checkbox-length) 0;
-    }
-
-    &:hover + .checkbox-img {
-      background-position: calc(-6 * @checkbox-length) 0;
-    }
-
-    &:checked + .checkbox-img {
-      background-position: calc(-7 * @checkbox-length) 0;
-    }
-
-    &:disabled + .checkbox-img {
-      background-position: calc(-8 * @checkbox-length) 0;
-    }
-
-    &:disabled:checked + .checkbox-img {
-      background-position: calc(-9 * @checkbox-length) 0;
-    }
+.dropdown-toggle {
+  &.btn-default {
+    background-color: @pale-primary;
   }
 }

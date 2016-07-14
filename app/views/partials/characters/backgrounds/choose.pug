@@ -1,0 +1,44 @@
+.panel.panel-primary
+  .panel-heading Background
+  .panel-body
+    .row
+      .col-xs-5
+        dropdown("[options]"="backgrounds | obj_to_arr" "display"="name" "[(value)]"="background")
+      .col-xs-19
+        .row-fluid
+          .col-xs-24
+            label {{background?.info?.ties?.name}}
+            .row-fluid
+              .col-xs-24
+                text-dropdown("[options]"="background?.info?.ties?.list" "[(value)]"="tie")
+        .row-fluid
+          .col-xs-24.m-t-10
+            label Personality Traits
+            .row-fluid
+              .col-xs-24
+                text-dropdown("[options]"="background?.info?.personality_traits" "[(value)]"="personality_traits[0]")
+            .row-fluid
+              .col-xs-24.m-t-5
+                text-dropdown("[options]"="background?.info?.personality_traits" "[(value)]"="personality_traits[1]")
+        .row-fluid
+          .col-xs-24.m-t-10
+            label Ideal
+            .row-fluid
+              .col-xs-4
+                input.form-control(placeholder="Ideal name" "[(value)]"="ideal.name")
+              .col-xs-4
+                dropdown("[options]"="ideal_alignments" "[(value)]"="ideal.alignment")
+              .col-xs-16
+                text-dropdown("[options]"="background?.info?.ideals" "display"="description" "menu_display"="display" "[(value)]"="ideal")
+        .row-fluid
+          .col-xs-24.m-t-10
+            label Bond
+            .row-fluid
+              .col-xs-24
+                text-dropdown("[options]"="background?.info?.bonds" "[(value)]"="bond")
+        .row-fluid
+          .col-xs-24.m-t-10
+            label Flaw
+            .row-fluid
+              .col-xs-24
+                text-dropdown("[options]"="background?.info?.flaws" "[(value)]"="flaw")

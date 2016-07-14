@@ -7,18 +7,17 @@
           .col-xs-24
             label(for="character-name") Character Name
             input#character-name.form-control(type="text" value="")
-        .row
+        .row.m-t-10
           .col-xs-24
             label(for="player-name") Player Name
             input#player-name.form-control(type="text" value="")
-        .row
+        .row.m-t-10
           .col-xs-19
             label(for="experience-points") Experience Points
             input#experience-points.form-control(type="number" "[(ngModel)]"="experience_points" min="0" step="1")
           .col-xs-5
             label(for="character-level") Level
-            select#character-level.form-control('[(ngModel)]'="level")
-              option(*ngFor="let lvl of levels" '[ngValue]'="lvl") {{lvl.level}}
+            dropdown("[id]"="'character-level'" "[options]"="levels" "display"="level" "[(value)]"="level")
       .col-xs-12
         .row
           .col-xs-24

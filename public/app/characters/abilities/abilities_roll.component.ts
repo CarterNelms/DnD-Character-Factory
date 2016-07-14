@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { CheckboxComponent } from '../../common/checkbox.component';
+import { DropdownComponent } from '../../common/dropdown.component';
 import { HelpComponent } from '../../common/help.component';
 
 import { AbilitiesService } from './abilities.service';
@@ -14,7 +15,7 @@ import { ObjToArrPipe } from '../../common/obj_to_arr.pipe';
 @Component({
   selector: 'ability-scores-roll',
   templateUrl: '/partials/characters/abilities/roll',
-  directives: [ROUTER_DIRECTIVES, CheckboxComponent, HelpComponent],
+  directives: [ROUTER_DIRECTIVES, CheckboxComponent, DropdownComponent, HelpComponent],
   providers: [],
   pipes: [AbilityBonusPipe, AbilityModifierPipe, AbilityScorePipe, ObjToArrPipe]
 })

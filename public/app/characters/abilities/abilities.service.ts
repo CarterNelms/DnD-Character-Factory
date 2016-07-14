@@ -40,19 +40,8 @@ export class AbilitiesService extends Service {
     }
 
     super.http_get('/characters/abilities/get-info', result => {
-      let abilities = {};
-      _.each(result.abilities, (ability, index) => {
-        ability.index = index;
-        abilities[ability._id] = ability;
-      });
-      this.abilities = abilities;
-
-      let roll_methods = {};
-      result.ability_roll_methods.forEach(method => {
-        roll_methods[method._id] = method;
-      });
-      this.roll_methods = roll_methods;
-
+      this.abilities = this.arrayToObjectByObjectID(result.abilities, true);
+      this.roll_methods = this.arrayToObjectByObjectID(result.ability_roll_methods);
       fn(this.abilities, this.roll_methods);
     });
   }
@@ -74,25 +63,6 @@ export class AbilitiesService extends Service {
       this.bonuses[bonus_type][asi.ability_id] = asi.increase;
     });
   }
-
-  // setRaceBonuses (race) {
-  //   let traits = race.traits;
-  //   if (!traits) {
-  //     return;
-  //   }
-
-  //   let score_increases = this.getScoreIncreasesFromTraits(traits);
-
-  //   this.setBonuses('race', score_increases);
-  // }
-
-  // setSubraceBonuses (subrace) {
-  //   let traits = subrace.traits;
-
-  //   let score_increases = !traits ? [] : this.getScoreIncreasesFromTraits(traits);
-
-  //   this.setBonuses('subrace', score_increases);
-  // }
 
   private getScoreIncreasesFromTraits (traits) {
     let score_increases = [];

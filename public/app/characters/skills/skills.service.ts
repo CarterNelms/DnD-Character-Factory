@@ -9,6 +9,7 @@ export class SkillsService extends Service {
     this.proficiencies = {
       allowed: {
         all: this.getBlankProficiencies(),
+        background: this.getBlankProficiencies(),
         race: this.getBlankProficiencies(),
         class: this.getBlankProficiencies(),
         subrace: this.getBlankProficiencies()
@@ -37,15 +38,13 @@ export class SkillsService extends Service {
     }
 
     super.http_get('/characters/skills/get', result => {
-      let skills = {},
-      is_proficient = {};
+      this.skills = this.arrayToObjectByObjectID(result.skills);
 
-      result.skills.forEach(skill => {
-        skills[skill._id] = skill;
+      let is_proficient = {};
+      _.each(this.skills, (skill, skill_id) => {
         is_proficient[skill._id] = false;
       });
 
-      this.skills = skills;
       this.proficiencies.is_proficient = is_proficient;
       fn(this.skills);
     });

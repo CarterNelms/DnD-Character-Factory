@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { CheckboxComponent } from '../common/checkbox.component';
+import { DropdownComponent } from '../common/dropdown.component';
 
 import { CharacterInfoService } from './info.service';
  
 @Component({
   selector: 'character-info',
   templateUrl: '/partials/characters/info',
-  directives: [ROUTER_DIRECTIVES, CheckboxComponent],
+  directives: [ROUTER_DIRECTIVES, CheckboxComponent, DropdownComponent],
   providers: []
 })
 
@@ -32,7 +33,11 @@ export class CharacterInfoComponent {
     };
 
     this.service.getLevels(levels => {
-      this.experience_points = this.levels[Math.floor(Math.random() * this.levels.length)].experience_points;
+      let level = this.levels[Math.floor(Math.random() * this.levels.length)];
+      if (!level) {
+        return;
+      }
+      this.experience_points = level.experience_points;
     });
     
     this.setRandomAlignment();

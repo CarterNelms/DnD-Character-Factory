@@ -3,5 +3,4 @@
   .panel-body
     .row
       .col-xs-24
-        select.form-control('[(ngModel)]'="class")
-          option(*ngFor="let c of (classes | obj_to_arr)" '[ngValue]'="c") {{c.name}}
+        dropdown("[options]"="classes | obj_to_arr" "display"="name" "[(value)]"="class")

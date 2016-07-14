@@ -16,17 +16,11 @@ export class RacesService extends Service {
     }
 
     super.http_get('/characters/races/get', result => {
-      let races = {};
-      result.races.forEach(race => {
-        let subraces = {};
-        race.subraces.forEach(subrace => {
-          subraces[subrace._id] = subrace;
-        });
-        race.subraces = subraces;
-        races[race._id] = race;
+      let races = _.map(result.races, race => {
+        race.subraces = this.arrayToObjectByObjectID(race.subraces);
+        return race;
       });
-
-      this.races = races;
+      this.races = this.arrayToObjectByObjectID(races);
       fn(this.races);
     });
   }

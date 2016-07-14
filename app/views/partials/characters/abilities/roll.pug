@@ -9,8 +9,7 @@
             help.m-t-10.pull-right('[header]'="roll_method.name" '[body]'="roll_method.description" '[text]'="'Explain ' + roll_method.name")
         .row
           .col-xs-24
-            select.form-control('[(ngModel)]'="roll_method")
-              option(*ngFor="let method of (roll_methods | obj_to_arr)" '[ngValue]'="method") {{method.name}}
+            dropdown("[options]"="roll_methods | obj_to_arr" "display"="name" "[(value)]"="roll_method")
         .row.m-t-20(*ngIf="roll_method._id === 'point_buy'")
           .col-xs-24
             p Points: {{points.used}} / {{points.max}}
@@ -65,6 +64,6 @@
                   td
                     .row-fluid
                       .col-xs-12.p-o-0
-                        span.label(class="{{arePointsWasted(ability._id) ? 'label-danger' : 'label-default'}}") {{getTotalScore(ability._id) | ability_score}}
+                        span.label(class="{{arePointsWasted(ability._id) ? 'label-danger' : 'label-primary'}}") {{getTotalScore(ability._id) | ability_score}}
                       .col-xs-12.p-o-0
                         span.pull-right {{getModifier(ability._id) | ability_modifier:true}}
