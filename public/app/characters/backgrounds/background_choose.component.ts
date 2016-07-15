@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { DropdownComponent } from '../../common/dropdown.component';
+import { HelpComponent } from '../../common/help.component';
 import { TextDropdownComponent } from '../../common/text-dropdown.component';
 
 import { BackgroundsService } from './backgrounds.service';
@@ -12,7 +13,7 @@ import { ObjToArrPipe } from '../../common/obj_to_arr.pipe';
 @Component({
   selector: 'background-choose',
   templateUrl: '/partials/characters/backgrounds/choose',
-  directives: [ROUTER_DIRECTIVES, DropdownComponent, TextDropdownComponent],
+  directives: [ROUTER_DIRECTIVES, DropdownComponent, HelpComponent, TextDropdownComponent],
   providers: [BackgroundsService],
   pipes: [ObjToArrPipe]
 })

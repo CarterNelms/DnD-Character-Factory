@@ -11,23 +11,17 @@ export class TextDropdownComponent {
   private _value: any;
 
   @Input() disabled: boolean;
-  @Input() display: string;
+  @Input() display: string = "";
   @Input() id: string;
-  @Input() menu_display: string;
+  @Input() is_randomizable: boolean = false;
+  @Input() menu_display: string = "";
   @Input() name: string;
   @Input() options: any[];
   @Input() value: any;
 
   @Output() valueChange = new EventEmitter();
 
-  constructor() {
-    if (this.display == null) {
-      this.display = "";   
-    }
-    if (this.menu_display == null) {
-      this.menu_display = "";   
-    }
-  }
+  constructor() { }
 
   get text () {
     return this.getDisplay(this.value);
@@ -68,6 +62,17 @@ export class TextDropdownComponent {
   set value (val) {
     this._value = val;
     this.valueChange.emit(this._value);
+  }
+
+  setRandomValue () {
+    let old_value = this.value,
+    new_value;
+
+    do {
+      new_value = _.sample(this.options);
+    } while (old_value === new_value);
+
+    this.value = new_value;
   }
 
   getDisplay (option) {

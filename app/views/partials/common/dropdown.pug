@@ -1,6 +1,6 @@
 .dropdown
   button.form-control.btn.btn-default.dropdown-toggle.text-left.fill-x(id="{{id}}" type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true') {{getDisplay(value)}}
-    i.fa.fa-sort.pull-right.m-t-3
+    i.fa.fa-sort.pull-right
   ul.dropdown-menu("[attr.aria-labelledby]"='id')
     li(*ngFor="let o of options")
       a(href='#' "(click)"="onClick($event, o)") {{getDisplay(o)}}

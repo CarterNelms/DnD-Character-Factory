@@ -1,8 +1,10 @@
 .input-group
   input.form-control(type='text', aria-label='...' "[(ngModel)]"="text")
   .input-group-btn
-    button.form-control.btn.btn-default.dropdown-toggle(id="{{id}}" type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
-      i.fa.fa-sort.m-t-3
+    button.btn.btn-default(*ngIf="is_randomizable" type="button" "(click)"="setRandomValue()")
+      i.fa.fa-random
+    button.btn.btn-default.dropdown-toggle(id="{{id}}" type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
+      i.fa.fa-sort
     ul.dropdown-menu.dropdown-menu-right("[attr.aria-labelledby]"='id')
       li(*ngFor="let o of options")
         a(href='#' "(click)"="onClick($event, o)" "[innerHtml]"="getMenuDisplay(o)")

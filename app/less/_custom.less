@@ -162,8 +162,14 @@ checkbox {
   }
 }
 
-.dropdown-toggle {
-  &.btn-default {
-    background-color: @pale-primary;
+.dropdown, .input-group-btn {
+  .btn {
+    > i.fa {
+      margin-top: 3px;
+    }
+
+    &.btn-default {
+      background-color: @pale-primary;
+    }
   }
 }

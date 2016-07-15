@@ -17,6 +17,10 @@
         }
       }
     ],
+    "feature": {
+      "name":"Criminal Contact",
+      "description":"You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get messages to and from your contact, even over great distances; specifically, you know the local messengers, corrupt caravan masters, and seedy sailors who can deliver messages for you."
+    },
     "info": {
       "ties": {
         "name":"Criminal Specialty",
@@ -109,6 +113,10 @@
         }
       }
     ],
+    "feature": {
+      "name":"By Popular Demand",
+      "description":"You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble’s court. At such a place, you receive free lodging and food of a modest or comfortable standard (depending on the quality of the establishment), as long as you perform each night. In addition, your performance makes you something of a local figure. When strangers recognize you in a town where you have performed, they typically take a liking to you."
+    },
     "info": {
       "ties": {
         "name":"Entertainer Routine",

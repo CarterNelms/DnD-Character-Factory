@@ -12,6 +12,10 @@ var BackgroundSchema = new mongoose.Schema({
   _id: { type: String, required: true },
   name: { type: String, required: true },
   traits: { type: [TraitSchema], default: [], required: true },
+  feature: {
+    name: { type: String, required: true },
+    description: { type: String, required: true }
+  },
   info: {
     ties: {
       name: { type: String, required: true },

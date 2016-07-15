@@ -10,7 +10,13 @@
             "ability_id":"constitution",
             "increase":2
           }
-        ]
+        ],
+        "proficiencies": {
+          "skills": {
+            "proficiency_ids": ["acribatics","animal_handling"],
+            "count":1
+          }
+        }
       }
     ],
     "subraces": [
